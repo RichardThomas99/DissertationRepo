@@ -17,7 +17,7 @@ class SizeAnalysis extends Component
         <p>{"£"+quantity + average}</p>
       )
     })
-
+ 
   }
 
   graph(quantityArray,averagesArray)

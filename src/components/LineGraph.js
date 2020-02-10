@@ -11,7 +11,7 @@ graph()
 {
   const data = [
   {
-    "name": "£0 - £10",
+    "name": "£0 - £10", 
     "uv": 7,
     "amt": 2400
   },

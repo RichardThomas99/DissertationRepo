@@ -15,7 +15,7 @@ function Nav()
     <ul className = "nav-links">
 
     <Link style = {navStyle} to= "/Settings">
-      <li>Settings</li>
+      <li>Settings</li> 
     </Link>
     </ul>
     </nav>

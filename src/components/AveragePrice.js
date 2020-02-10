@@ -9,7 +9,7 @@ class AveragePrice extends Component
     getAveragePrice(priceArray,maxPriceTaken)
     {
           var fullCount = 0;
-          var acceptedCount =0;
+          var acceptedCount =0; 
           var total = 0;
           var temp = 0;
 

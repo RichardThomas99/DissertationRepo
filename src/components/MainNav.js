@@ -8,7 +8,7 @@ function MainNav()
   {
     color:'white'
   };
-
+ 
   return(
     <nav className = "navMain">
       <ul className = "mainNav-links">
