@@ -24,6 +24,33 @@ class App extends Component
 {
   /* NEED TO MOVE MAINNAV THIS TO JUST THE PAGES WHICH USE THIS NAV BAR. OTHERWISE IT WILL APPEAR ON THE SETTINGS ASWELL.*/
 
+constructor()
+{
+  super();
+  this.state = {
+    averagePrice:0
+  };
+}
+
+componentDidMount()
+{
+    const trainerRef = firebase.database().ref().child('TrainerNameID');
+    const indexRef = trainerRef.child('IndexedValue');
+    const averagePriceRef = indexRef.child('AveragePrice');
+
+    console.log("trainerRef: " + trainerRef);
+    console.log("indexRef: " + indexRef);
+    console.log("averagePriceRef: " + averagePriceRef);
+
+    averagePriceRef.on('value', snap =>{
+      console.log(snap.val());
+
+      this.setState({
+        averagePrice: snap.val()
+      });
+    });
+}
+
 render()
 {
   return (
@@ -35,6 +62,7 @@ render()
         <Nav/>
         <MainNav/>
 
+        <h1>{this.state.averagePrice}</h1>
 
         <Route path = "/Settings" component ={Settings}/>
         <Route path = "/DataSets" component ={DataSets}/>
