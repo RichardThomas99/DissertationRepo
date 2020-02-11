@@ -46,7 +46,7 @@ componentDidMount()
       console.log(snap.val());
 
       this.setState({
-        averagePrice: snap.val()
+        averagePrice: snap.val() 
       });
     });
 }
