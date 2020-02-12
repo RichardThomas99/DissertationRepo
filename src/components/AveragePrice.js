@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import {gql} from 'apollo-boost';
-import{graphql} from 'react-apollo';
-import DataSets from '../DataSets'
 
 class AveragePrice extends Component
 {
@@ -9,7 +6,7 @@ class AveragePrice extends Component
     getAveragePrice(priceArray,maxPriceTaken)
     {
           var fullCount = 0;
-          var acceptedCount =0; 
+          var acceptedCount =0;
           var total = 0;
           var temp = 0;
 

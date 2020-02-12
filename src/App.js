@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import ApolloClient from 'apollo-boost';
 import {ApolloProvider} from 'react-apollo';
 import * as firebase from 'firebase';
-import{firebaseConfig} from './Config';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 //components
 import Settings from './Settings'
@@ -39,12 +38,12 @@ componentDidMount()
     const indexRef = trainerRef.child('IndexedValue');
     const averagePriceRef = indexRef.child('AveragePrice');
 
-    console.log("trainerRef: " + trainerRef);
-    console.log("indexRef: " + indexRef);
-    console.log("averagePriceRef: " + averagePriceRef);
+    // console.log("trainerRef: " + trainerRef);
+    // console.log("indexRef: " + indexRef);
+    // console.log("averagePriceRef: " + averagePriceRef);
 
     averagePriceRef.on('value', snap =>{
-      console.log(snap.val());
+      // console.log(snap.val());
 
       this.setState({
         averagePrice: snap.val()
@@ -64,8 +63,6 @@ render()
 
         <Nav/>
         <MainNav/>
-
-        <h1>{this.state.averagePrice}</h1>
 
         <Route path = "/Settings" component ={Settings}/>
         <Route path = "/DataSets" component ={DataSets}/>

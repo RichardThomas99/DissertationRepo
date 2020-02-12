@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import {gql} from 'apollo-boost';
-import{graphql} from 'react-apollo';
-import DataSets from '../DataSets'
 
 import {
-  BarChart, Bar, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
 class SizeAnalysis extends Component
@@ -17,14 +14,13 @@ class SizeAnalysis extends Component
         <p>{"£"+quantity + average}</p>
       )
     })
- 
+
   }
 
   graph(quantityArray,averagesArray)
   {
 
     var dataArray = Array(25);
-    var t=0;
 
     for(var i=0;i<25;i++)
     {
@@ -67,7 +63,8 @@ class SizeAnalysis extends Component
     getDistribution(array)
     {
       var data = new Array(205);
-      for (var i = 0; i < data.length; i++)
+      var i;
+      for ( i = 0; i < data.length; i++)
       {
         data[i] = new Array(3);
       }
@@ -87,10 +84,10 @@ class SizeAnalysis extends Component
 
       var size;
       var price;
-      var total;
       var maxPriceTaken = 250.00;
+      var y;
 
-      for(var i=0;data[i+1] !=null;i++)
+      for(i=0;data[i+1] !=null;i++)
       {
         size = data[i][2];
         price = parseFloat(data[i][1]);
@@ -107,11 +104,10 @@ class SizeAnalysis extends Component
         }
       }
 
-      for(var y=0;y<25;y++)
+      for(y=0;y<25;y++)
       {
         averagesArray[y] = parseFloat(averagesArray[y])/parseFloat(quantityArray[y]);
-        if(averagesArray[y] == "NaN")
-        {
+        if(averagesArray[y] === "NaN"){
           averagesArray[i] = 0;
         }
         var temp = (y+3)/2;
@@ -134,30 +130,25 @@ class SizeAnalysis extends Component
     //Size 4.
     const re3 = /size.\w*\W*.?(\d\d?(?:\.5)?)/i;
 
-    if(re.exec(desc) != null)
-    {
+    if(re.exec(desc) != null){
       regexOut = re.exec(desc);
       console.log("re: "+ regexOut[1]);
       return regexOut[1];
     }
-    else if(re2.exec(desc) != null)
-    {
+    else if(re2.exec(desc) != null){
       regexOut = re2.exec(desc);
       console.log("re2: "+ regexOut[1]);
       return regexOut[1];
     }
-    else if (re3.exec(desc) != null)
-    {
+    else if (re3.exec(desc) != null){
       regexOut = re3.exec(desc);
       console.log("re3: "+ regexOut[1]);
       return regexOut[1];
     }
-    else
-    {
+    else{
       console.log("SIZE NOT FOUND");
       return -1;
     }
-
   }
 
   render()
@@ -165,13 +156,14 @@ class SizeAnalysis extends Component
     console.log(this.props);
 
     var x = new Array(205);
-    for (var i = 0; i < x.length; i++)
+    var i;
+    for (i = 0; i < x.length; i++)
     {
       x[i] = new Array(3);
     }
 
     var distribution = Array(2);
-    for (var i = 0; i < distribution.length; i++)
+    for (i = 0; i < distribution.length; i++)
     {
       distribution[i] = new Array(25);
     }
@@ -179,7 +171,7 @@ class SizeAnalysis extends Component
     if(!this.props.loading)
     {
       x = this.props.array;
-      var i = 0;
+      i = 0;
 
      while(x[i+1]!=null)
      {

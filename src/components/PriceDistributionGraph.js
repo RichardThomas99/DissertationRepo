@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import {gql} from 'apollo-boost';
-import{graphql} from 'react-apollo';
-import DataSets from '../DataSets'
 import {
-AreaChart, Area, Brush, ReferenceLine, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+AreaChart, Area, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
 class PriceDistributionGraph extends Component
@@ -14,7 +11,7 @@ class PriceDistributionGraph extends Component
     // console.log("array[0]" + array[0][0]);
     // console.log("array[1]" + array[1][0]);
     var dataArray = Array(numOfBuckets);
- 
+
     for(var i=0;i<numOfBuckets;i++)
     {
       dataArray[i] =

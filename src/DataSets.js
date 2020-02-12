@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {gql} from 'apollo-boost';
 import{graphql} from 'react-apollo';
 import {nikeAirMax97SilverBulletsQuery} from './queries/queries';
 
