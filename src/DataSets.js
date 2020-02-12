@@ -89,11 +89,7 @@ class DataSets extends Component
 }
 catch(exception)
 {
-  if(exception.name == 'NetworkError')
-  {
-    console.log('There was a network error.');
-  }
-    console.log('There was an error.');
+    console.log('There was an ERROR CAUGHT getting data from GraphQL! The exception was: '+ exception);
 }
 
   return(
