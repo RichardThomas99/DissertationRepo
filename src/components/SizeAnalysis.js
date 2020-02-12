@@ -59,17 +59,11 @@ class SizeAnalysis extends Component
 
   }
 
-  // //returned values:
+   //returned values:
     getDistribution(array)
     {
+      //Defining variables for method
       var data = new Array(205);
-      var i;
-      for ( i = 0; i < data.length; i++)
-      {
-        data[i] = new Array(3);
-      }
-      data=array;
-
 
       var maxSize = 13;
       var minSize = 3;
@@ -77,15 +71,33 @@ class SizeAnalysis extends Component
       var quantityArray = Array(25);
       var averagesArray = Array(25);
 
-      var z=25;
-      while(z--) quantityArray[z] = 0;
-      z=25;
-      while(z--) averagesArray[z] = 0;
+      //Loop counter variables
+      var i;
+      var z;
 
       var size;
       var price;
       var maxPriceTaken = 250.00;
       var y;
+      var temp;
+
+      for ( i = 0; i < data.length; i++)
+      {
+        data[i] = new Array(3);
+      }
+      data=array;
+
+
+      z=25;
+      while(z--)
+      {
+        quantityArray[z] = 0;
+        averagesArray[z] = 0;
+
+      }
+
+
+
 
       for(i=0;data[i+1] !=null;i++)
       {
@@ -94,7 +106,7 @@ class SizeAnalysis extends Component
 
         if(size>=minSize && size<maxSize)
         {
-            var temp = (parseFloat(size)*2) -3;
+            temp = (parseFloat(size)*2) -3;
 
             if(price<maxPriceTaken)
             {
@@ -110,9 +122,9 @@ class SizeAnalysis extends Component
         if(averagesArray[y] === "NaN"){
           averagesArray[i] = 0;
         }
-        var temp = (y+3)/2;
+        temp = (y+3)/2;
 
-        console.log("average for size"+temp +": " + averagesArray[y]);
+        //console.log("average for size"+temp +": " + averagesArray[y]);
       }
 
     return [quantityArray,averagesArray];
@@ -150,6 +162,7 @@ class SizeAnalysis extends Component
       return -1;
     }
   }
+
 
   render()
   {
@@ -192,7 +205,7 @@ class SizeAnalysis extends Component
 
 
         <h3>Raw Size Data: </h3>
-      //{this.printSizeData(distribution[0],distribution[1])}
+      {/*this.printSizeData(distribution[0],distribution[1])*/}
 
     </div>
   );

@@ -22,9 +22,11 @@ class AveragePrice extends Component
 
             fullCount++;
           }
-          console.log(fullCount)
-          console.log(acceptedCount);
-          console.log(total);
+
+          //Debugging logs
+          // console.log(fullCount)
+          // console.log(acceptedCount);
+          // console.log(total);
 
           var average = total/acceptedCount;
           return (average);
@@ -38,7 +40,7 @@ class AveragePrice extends Component
 
     if(!this.props.loading)
     {
-      var average  = this.getAveragePrice(this.props.content,upperBound);
+       average  = this.getAveragePrice(this.props.content,upperBound);
     }
 
 
