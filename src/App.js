@@ -43,7 +43,7 @@ componentDidMount()
     // console.log("averagePriceRef: " + averagePriceRef);
 
     averagePriceRef.on('value', snap =>{
-      // console.log(snap.val());
+      // console.log(snap.val()); 
 
       this.setState({
         averagePrice: snap.val()
