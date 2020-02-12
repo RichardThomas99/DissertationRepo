@@ -51,7 +51,7 @@ class AveragePrice extends Component
     <p>Settings behind this average are listed below. </p>
       <ul id="content-list">
           <li>Original Array Used = Untampered</li>
-          <li>Lower bounds = £{lowerBound}</li>
+          <li>Lower bounds = £{lowerBound}</li> 
           <li>Upper bounds = £{upperBound}</li>
       </ul>
     </div>
