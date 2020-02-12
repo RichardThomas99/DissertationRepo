@@ -34,6 +34,7 @@ constructor()
 
 componentDidMount()
 {
+
     const trainerRef = firebase.database().ref().child('TrainerNameID');
     const indexRef = trainerRef.child('IndexedValue');
     const averagePriceRef = indexRef.child('AveragePrice');
@@ -46,9 +47,11 @@ componentDidMount()
       console.log(snap.val());
 
       this.setState({
-        averagePrice: snap.val() 
+        averagePrice: snap.val()
       });
     });
+
+
 }
 
 render()

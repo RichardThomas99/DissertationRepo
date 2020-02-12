@@ -29,7 +29,9 @@ class DataSets extends Component
   {
     var data = this.props.data;
 
+
       const priceArray = data.viewer.productSearch.edges.map(edges=> edges.node.price.display );
+
       //  console.log(priceArray);
       // const idArray = data.viewer.productSearch.edges.map(edges=> edges.node.id );
       //   console.log(idArray);
@@ -71,15 +73,27 @@ class DataSets extends Component
 
   var data = this.props.data;
   console.log(this.props);
-
+  try
+  {
   if(!data.loading)
   {
+
     var temp = this.getData();
+
     priceArray = temp[0];
     descriptionArray = temp[1];
 
     x = this.mapArraysTogether(temp[0],temp[1]);
     //console.log("x00: " + x[0][1]);
+  }
+}
+catch(exception)
+{
+  if(exception.name == 'NetworkError')
+  {
+    console.log('There was a network error.');
+  }
+    console.log('There was an error.');
 }
 
   return(
