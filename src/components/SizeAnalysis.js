@@ -68,18 +68,20 @@ class SizeAnalysis extends Component
       var maxSize = 13;
       var minSize = 3;
 
+      //25 one for each half size.
       var quantityArray = Array(25);
       var averagesArray = Array(25);
 
       //Loop counter variables
       var i;
       var z;
+      var y;
 
       var size;
       var price;
       var maxPriceTaken = 250.00;
-      var y;
       var temp;
+
 
       for ( i = 0; i < data.length; i++)
       {
@@ -89,15 +91,10 @@ class SizeAnalysis extends Component
 
 
       z=25;
-      while(z--)
-      {
+      while(z--){
         quantityArray[z] = 0;
         averagesArray[z] = 0;
-
       }
-
-
-
 
       for(i=0;data[i+1] !=null;i++)
       {
