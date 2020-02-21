@@ -10,12 +10,12 @@ function Nav()
   };
 
   return(
-    <nav>
+    <nav data-testid = "navigation">
     <h1>RESELLER COMPANION APP</h1>
     <ul className = "nav-links">
 
     <Link style = {navStyle} to= "/Settings">
-      <li>Settings</li> 
+      <li>Settings</li>
     </Link>
     </ul>
     </nav>

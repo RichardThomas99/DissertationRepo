@@ -8,9 +8,9 @@ function MainNav()
   {
     color:'white'
   };
- 
+
   return(
-    <nav className = "navMain">
+    <nav data-testid = "navigation" className = "navMain">
       <ul className = "mainNav-links">
         <Link style = {mainNavStyle} to= "/TopListings">
           <li>Top Listings</li>
