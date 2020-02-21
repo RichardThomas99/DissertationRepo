@@ -10,6 +10,7 @@ class AveragePrice extends Component
           var total = 0;
           var temp = 0;
 
+//***FULLCOUNT SHOULD START FROM *? ****************!!!!!!!!
           while(priceArray[fullCount+1]!=null)
           {
             temp = parseFloat(priceArray[fullCount]);
@@ -51,7 +52,7 @@ class AveragePrice extends Component
     <p>Settings behind this average are listed below. </p>
       <ul id="content-list">
           <li>Original Array Used = Untampered</li>
-          <li>Lower bounds = £{lowerBound}</li> 
+          <li>Lower bounds = £{lowerBound}</li>
           <li>Upper bounds = £{upperBound}</li>
       </ul>
     </div>
