@@ -17,7 +17,7 @@ class DecayRate extends Component
   return (
     <div>
 
-    <h3>DecayRate: {decayRate} </h3>
+    <h2>Decay-Rate: {decayRate} </h2>
     <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.If the rate is between 0 and 1 the price is falling over time. If the rate is greater than 1 then the price is increasing.</p>
     <p>Settings behind the decay-rate are listed below. </p>
       <ul id="content-list">
