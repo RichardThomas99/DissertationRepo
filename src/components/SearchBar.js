@@ -3,9 +3,10 @@ import'../App.css';
 
 class SearchBar extends Component
 {
-  helloWorld()
+  clicked()
   {
-    console.log("helloWorld");
+    var searchTerm = document.getElementById("textSearch").value;
+    console.log("Search Term: " + searchTerm);
   }
 
 render()
@@ -14,10 +15,9 @@ render()
     <div class = "searchDiv">
       <form>
         <label>
-          <input id = "textSearch"  type="text" name="product" />
+          <input id = "textSearch"  type="text" name="product" placeholder ="Search a Product..." />
         </label>
-          <input type="submit" value="Search" />
-          <button onClick = {(e) => {e.preventDefault(); this.helloWorld();}}>TheButton</button>
+          <button onClick = {(e) => {e.preventDefault(); this.clicked();}}> Submit </button>
         </form>
       </div>
     );
