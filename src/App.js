@@ -9,7 +9,6 @@ import Settings from './Settings'
 import TopListings from './TopListings'
 import DataSets from './DataSets'
 import OverTimeAnalysis from './OverTimeAnalysis'
-import SearchBar from './components/SearchBar'
 import Nav from './components/Nav'
 import MainNav from './components/MainNav'
 
@@ -63,7 +62,7 @@ render()
 
         <Nav/>
         <MainNav/>
-        <SearchBar/>
+
 
         <Route path = "/Settings" component ={Settings}/>
         <Route path = "/DataSets" component ={DataSets}/>
