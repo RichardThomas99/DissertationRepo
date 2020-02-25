@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import OverTimeText from './components/OverTimeText';
 import SearchBar from './components/SearchBar';
 import DecayRate from './components/DecayRate';
-
+import AveragePriceOverTime from './components/AveragePriceOverTime';
 class OverTimeAnalysis extends Component
 {
 render()
@@ -15,6 +15,7 @@ render()
           <OverTimeText/>
           <SearchBar/>
           <DecayRate/>
+          <AveragePriceOverTime/>
         </div>
       );
   }

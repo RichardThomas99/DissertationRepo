@@ -8,6 +8,8 @@ class AveragePriceOverTime extends Component
 
   graph(array,bucketSize,maximumBucket,numOfBuckets)
   {
+    if(this.props.array!=null)
+    {
     // console.log("array[0]" + array[0][0]);
     // console.log("array[1]" + array[1][0]);
     var dataArray = Array(numOfBuckets);
@@ -38,17 +40,20 @@ class AveragePriceOverTime extends Component
     );
 
       return renderBarChart;
-
+    }
   }
 
   printDistribution(c, bucketSize)
   {
+    if(this.props.array!=null)
+    {
     //not the most efficient way of printing the arrays
     return c.map(c=>{
       return(
         <p>{"£"+(c[0]-bucketSize) + "-£" +(c[0])+ " - "+ c[1]}</p>
       )
     })
+  }
   }
 
 //returned values: c[0] = upperBucketSize, c[1] = count
@@ -100,7 +105,11 @@ class AveragePriceOverTime extends Component
     var bucketSize = 10;
     var maximumBucket = 200;
     var numOfBuckets= maximumBucket/bucketSize;
-    var distribution = this.getDistribution(bucketSize,maximumBucket,numOfBuckets);
+
+    if(this.props.array != null)
+    {
+      var distribution = this.getDistribution(bucketSize,maximumBucket,numOfBuckets);
+    }
 
     return (
     <div>
