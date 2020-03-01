@@ -12,14 +12,24 @@ runAjax()
   console.log("IN RUN AJAX");
 
   var jqXHR = $.ajax({
-      type: "POST",
-      url: " http://localhost:80/cmdTest.py",
+      type: "GET",
+      url: "http://localhost:5000/osStuff",
       async: false,
-      data: { mydata: "" }
+      data: { mydata: null}
   });
+
+
 
   console.log("PAST RUN AJAX");
 
+}
+
+httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "http://localhost:5000/", false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
 }
 
 
@@ -37,7 +47,7 @@ render()
           <ScoreText/>
           <SearchBar/>
 
-          {this.runAjax()}
+          {this.httpGet()}
 
         </div>
       );
