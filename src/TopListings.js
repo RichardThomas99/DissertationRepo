@@ -3,6 +3,7 @@ import ScoreText from './components/ScoreText';
 import SearchBar from './components/SearchBar';
 import Data from './data/data.json'
 
+
 class TopListings extends Component
 {
 printAllData()
@@ -23,9 +24,10 @@ calcAvePrice()
 {
   var total =0;
 
-  Data.map(function(postDetail)
+  Data.map(function(postDetail,index)
   {
     total = total + parseInt((postDetail.price).substring(1))
+    console.log(index);
   });
   return "Total Market Value is : £" + total;
 }
@@ -40,6 +42,7 @@ render()
           <ScoreText/>
           <SearchBar/>
           {this.calcAvePrice()}
+
         </div>
       );
   }

@@ -5,38 +5,53 @@ import * as firebase from 'firebase';
 class uploadScrape extends Component
 {
 
-componentDidMount()
+writeData()
 {
-    const trainerRef = firebase.database().ref().child('TrainerNameID');
-    const indexRef = trainerRef.child('IndexedValue');
-    const averagePriceRef = indexRef.child('AveragePrice');
+  const trainerRef = firebase.database().ref().child('TrainerNameID');
+  const indexRef = trainerRef.child('IndexedValue');
+  var dataArray = [];
+  var currentDate = new Date();
+  var formattedDate = currentDate.getFullYear()+"-"+currentDate.getMonth()+1+"-"+currentDate.getDate()+ " " + currentDate.getHours() + ":" + currentDate.getMinutes();
 
-    // console.log("trainerRef: " + trainerRef);
-    // console.log("indexRef: " + indexRef);
-    // console.log("averagePriceRef: " + averagePriceRef);
+  dataArray =
+  {
+    time: formattedDate
+  };
 
-    averagePriceRef.on('value', snap =>{
-      this.setState({
-        averagePrice: snap.val()
-      });
-    });
+  indexRef.push(dataArray)
+}
+writeRawJSON()
+{
+  var dataArray = [];
+  const trainerRef = firebase.database().ref().child('TrainerNameID');
+  const indexRef = trainerRef.child('IndexedValue');
 
+  Data.map(function(content,index)
+  {
+    dataArray =
+    {
+      price: content.price,
+      seller: content.seller,
+      desc: content.desc,
+      price: content.price,
+      size: content.size,
+      location: content.location,
+      listed: content.listed
+    };
+
+    indexRef.push(dataArray)
+  });
     return 0;
 }
-calcAvePrice()
+
+writeToFirebase()
 {
-  var total =0;
-
-  Data.map(function(postDetail)
-  {
-    total = total + parseInt((postDetail.price).substring(1))
-  });
-
-  return "Total Market Value is : £" + total;
+  {this.writeData()}
+  {this.writeRawJSON()}
 }
-
 render()
 {
+  {this.writeToFirebase()}
   return(
   <p>Upload Success</p>
   );

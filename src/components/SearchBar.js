@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import'../App.css';
+import UploadScrape from '../uploadScrape.js'
 
 class SearchBar extends Component
 {
+  state = {
+    visible: false
+  };
 
   httpGet()
   {
@@ -19,7 +23,7 @@ class SearchBar extends Component
     }
   }
 
-  clicked()
+  submit()
   {
 
     var searchTerm = document.getElementById("textSearch").value;
@@ -28,16 +32,24 @@ class SearchBar extends Component
     this.httpGet();
   }
 
+
 render()
 {
+  const upload = this.state.visible ? (
+    <UploadScrape/>
+  ):(<div></div>);
+
   return(
     <div class = "searchDiv">
       <form>
         <label>
           <input id = "textSearch"  type="text" name="product" placeholder ="Search a Product..." />
         </label>
-          <button onClick = {(e) => {e.preventDefault(); this.clicked();}}> Submit </button>
+          <button onClick = {(e) => {e.preventDefault(); this.submit();}}> Submit Search </button>
+          <button onClick = {() => {this.setState({visible: !this.state.visible});}}> Store Data </button>
         </form>
+
+        {upload}
       </div>
     );
 }
