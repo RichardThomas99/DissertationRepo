@@ -9,38 +9,42 @@ calcScore()
   var score = 100;
   var homeLocation = ["GB","United Kingdom","Reino Unido","UK"]
   var listed =[] ;
+  var timeListed = "";
 
   Data.map(function(content,index)
   {
     score=50;
 
+    //Location Component
     if(homeLocation.includes(((content.location).split(','))[1].substring(1)))
     {
-      score = score-5;
+      score = score+5;
     }
+
+
     if(content.price.substring(0,1)!="£")
     {
       console.log("The currency " + content.price.substring(0,1));
     }
-    console.log("ContentListed = " + content.listed);
 
+    //Time Listed Component
     listed = content.listed;
-    timeListed = (listed.split(" "))[2]
+    timeListed = (listed.split(" "))[2];
     if(timeListed == "SECONDS")
     {
-      console.log(listed);
+      score += 8;
     }
     else if(timeListed == "MINUTES")
     {
-      console.log(listed);
+      score += 6;
     }
     else if(timeListed == "DAYS")
     {
-      console.log(listed);
+      score += 3;
     }
     else if(timeListed == "WEEKS")
     {
-      console.log(listed);
+      score += 1;
     }
   });
 }
