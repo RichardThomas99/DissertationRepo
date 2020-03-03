@@ -12,7 +12,7 @@ calcScore()
 
   Data.map(function(content,index)
   {
-    score=100;
+    score=50;
 
     if(homeLocation.includes(((content.location).split(','))[1].substring(1)))
     {
@@ -25,8 +25,20 @@ calcScore()
     console.log("ContentListed = " + content.listed);
 
     listed = content.listed;
-    console.log(listed.split(" ")[2].substring(1));
-    if((listed.split(" "))[2].substring(1) == "HOURS")
+    timeListed = (listed.split(" "))[2]
+    if(timeListed == "SECONDS")
+    {
+      console.log(listed);
+    }
+    else if(timeListed == "MINUTES")
+    {
+      console.log(listed);
+    }
+    else if(timeListed == "DAYS")
+    {
+      console.log(listed);
+    }
+    else if(timeListed == "WEEKS")
     {
       console.log(listed);
     }
