@@ -1,13 +1,37 @@
 import React, {Component} from 'react';
-import ScoreText from './components/ScoreText';
-import SearchBar from './components/SearchBar';
-import Data from './data/data.json';
-import ConvertCurrency from './dataManipulationScripts/convertCurrency.js';
-import ScoreList from './components/ScoreList';
+import Data from '../data/data.json';
+import ConvertCurrency from '../dataManipulationScripts/convertCurrency.js';
 
 class TopListings extends Component
 {
+calcScore()
+{
+  var score = 100;
+  var homeLocation = ["GB","United Kingdom","Reino Unido","UK"]
+  var listed =[] ;
 
+  Data.map(function(content,index)
+  {
+    score=100;
+
+    if(homeLocation.includes(((content.location).split(','))[1].substring(1)))
+    {
+      score = score-5;
+    }
+    if(content.price.substring(0,1)!="£")
+    {
+      console.log("The currency " + content.price.substring(0,1));
+    }
+    console.log("ContentListed = " + content.listed);
+
+    listed = content.listed;
+    console.log(listed.split(" ")[2].substring(1));
+    if((listed.split(" "))[2].substring(1) == "HOURS")
+    {
+      console.log(listed);
+    }
+  });
+}
 printAllData()
 {
   return Data.map((content, index)=>{
@@ -46,11 +70,7 @@ render()
       return(
 
         <div>
-          <h1>TopListings</h1>
-          <ScoreText/>
-          <SearchBar/>
-          <ConvertCurrency/>
-          <ScoreList/>
+          {this.calcScore()}
         </div>
       );
   }
