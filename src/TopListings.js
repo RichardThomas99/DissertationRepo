@@ -6,29 +6,51 @@ import Data from './data/data.json'
 
 class TopListings extends Component
 {
+calcScore()
+{
+  var score = 100;
+  var homeLocation = ["GB","United Kingdom","Reino Unido","UK"]
+  Data.map(function(content,index)
+  {
+    score=100;
+
+    if(homeLocation.includes(((content.location).split(','))[1].substring(1)))
+    {
+      score = score-5;
+    }
+    if(content.price.substring(0,1)!="£")
+    {
+      console.log("The currency" + content.price.substring(0,1))
+    }
+  });
+}
 printAllData()
 {
-  return Data.map((postDetail, index)=>{
+  return Data.map((content, index)=>{
     return<div>
     <h1>{index}</h1>
-    <h3>{postDetail.seller}</h3>
-    <p>{postDetail.desc}</p>
-    <p>{postDetail.price}</p>
-    <p>{postDetail.size}</p>
-    <p>{postDetail.location}</p>
-    <p>{postDetail.listed}</p>
+    <h3>{content.seller}</h3>
+    <p>{content.desc}</p>
+    <p>{content.price}</p>
+    <p>{content.size}</p>
+    <p>{((content.location).split(','))[1]}</p>
+    <p>{content.listed}</p>
     </div>
   })
 }
 calcAvePrice()
 {
   var total =0;
-
-  Data.map(function(postDetail,index)
+  var price =0;
+  var quantity = 0;
+  Data.map(function(content,index)
   {
-    total = total + parseInt((postDetail.price).substring(1))
-    console.log(index);
+    price = parseInt((content.price).substring(1));
+    total = total + price;
+    quantity = index+1;
   });
+  console.log("index - "+ quantity);
+  console.log("average price - "+ (total/quantity))
   return "Total Market Value is : £" + total;
 }
 
@@ -41,8 +63,8 @@ render()
           <h1>TopListings</h1>
           <ScoreText/>
           <SearchBar/>
-          {this.calcAvePrice()}
-
+          {this.printAllData()}
+          {this.calcScore()}
         </div>
       );
   }
