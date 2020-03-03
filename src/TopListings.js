@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ScoreText from './components/ScoreText';
 import SearchBar from './components/SearchBar';
-import Data from './data/data.json'
-
+import Data from './data/data.json';
+import ConvertCurrency from './dataManipulationScripts/convertCurrency.js';
 
 class TopListings extends Component
 {
@@ -43,12 +43,14 @@ calcAvePrice()
   var total =0;
   var price =0;
   var quantity = 0;
+
   Data.map(function(content,index)
   {
     price = parseInt((content.price).substring(1));
     total = total + price;
     quantity = index+1;
   });
+
   console.log("index - "+ quantity);
   console.log("average price - "+ (total/quantity))
   return "Total Market Value is : £" + total;
@@ -65,6 +67,8 @@ render()
           <SearchBar/>
           {this.printAllData()}
           {this.calcScore()}
+          <ConvertCurrency/>
+
         </div>
       );
   }

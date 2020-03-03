@@ -37,7 +37,7 @@ render()
 {
   const upload = this.state.visible ? (
     <UploadScrape/>
-  ):(<div></div>);
+  ):(<div/>);
 
   return(
     <div class = "searchDiv">

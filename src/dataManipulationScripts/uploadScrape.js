@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Data from './data/data.json'
+import Data from '../data/data.json'
 import * as firebase from 'firebase';
 
 class uploadScrape extends Component
