@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import'../App.css';
-import UploadScrape from '../uploadScrape.js'
+import UploadScrape from '../dataManipulationScripts/uploadScrape.js'
 
 class SearchBar extends Component
 {
