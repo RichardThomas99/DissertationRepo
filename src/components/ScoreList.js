@@ -22,10 +22,10 @@ calcScore()
     score=50;
 
     //Location Component
-    if(homeLocation.includes(((content.location).split(','))[1].substring(1)))
-    {
-      score = score+5;
-    }
+    // if(homeLocation.includes(((content.location).split(','))[1].substring(1)))
+    // {
+    //   score = score+5;
+    // }
 
 
     if(content.price.substring(0,1)!="£")
