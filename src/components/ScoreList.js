@@ -4,12 +4,14 @@ import ConvertCurrency from '../dataManipulationScripts/convertCurrency.js';
 
 class TopListings extends Component
 {
+
 descScore(desc)
 {
   console.log("desc: "+ desc)
 }
 calcScore()
 {
+  var scores =[];
   var score = 100;
   var homeLocation = ["GB","United Kingdom","Reino Unido","UK"]
   var listed =[] ;
@@ -52,10 +54,10 @@ calcScore()
     }
 
     //Size Component
+    //If there is no size then there is no addition
     var size = parseFloat((content.size).substring(3));
     if(size%1 <2)
     {
-      console.log(size);
       if(size>=9)
       {
         score = score + 9-(size%9);
@@ -66,16 +68,25 @@ calcScore()
       }
     }
 
-
+    //Price Components
+    var price = parseFloat(content.price.substring(1));
+    console.log(price);
+    //The lower the price the higher the score addition
+    //DOUBLE CHECK THE 500 VALUE, IF GOODS ARE GREATER THAN 500 WE HAVE A PROBLEM
+    score = score + ((500-price)/25)
 
     console.log("score: " + score)
-  });
+    scores[index] = score;
+
+  })
+  return scores;
 }
-printAllData()
+printAllData(scores)
 {
   return Data.map((content, index)=>{
     return<div>
     <h1>{index}</h1>
+    <h1>{scores[index]}</h1>
     <h3>{content.seller}</h3>
     <p>{content.desc}</p>
     <p>{content.price}</p>
@@ -109,7 +120,7 @@ render()
       return(
 
         <div>
-          {this.calcScore()}
+          {this.printAllData(this.calcScore())}
         </div>
       );
   }
