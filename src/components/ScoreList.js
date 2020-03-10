@@ -4,6 +4,10 @@ import ConvertCurrency from '../dataManipulationScripts/convertCurrency.js';
 
 class TopListings extends Component
 {
+descScore(desc)
+{
+  console.log("desc: "+ desc)
+}
 calcScore()
 {
   var score = 100;
@@ -46,6 +50,25 @@ calcScore()
     {
       score += 1;
     }
+
+    //Size Component
+    var size = parseFloat((content.size).substring(3));
+    if(size%1 <2)
+    {
+      console.log(size);
+      if(size>=9)
+      {
+        score = score + 9-(size%9);
+      }
+      else
+      {
+        score = score + (size%9);
+      }
+    }
+
+
+
+    console.log("score: " + score)
   });
 }
 printAllData()
