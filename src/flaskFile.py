@@ -20,7 +20,7 @@ def cmdRun():
     print(tree)
     tree.write(filename)
 
-    cmd = r"C:\Users\Richard\AppData\Roaming\SysNucleus\WebHarvy\WebHarvy.exe C:\Users\Richard\Documents\DissertationRepo\DissertationRepo\src\scraperConfig\depopstars5-works.xml 1  C:\Users\Richard\Documents\DissertationRepo\DissertationRepo\src\data\data.json"
+    cmd = r"C:\Users\Richard\AppData\Roaming\SysNucleus\WebHarvy\WebHarvy.exe C:\Users\Richard\Documents\DissertationRepo\DissertationRepo\src\scraperConfig\depopstars5-works.xml 1  C:\Users\Richard\Documents\DissertationRepo\DissertationRepo\src\data\data.json overwrite"
     os.system(cmd)
 
     return "os System Run"
