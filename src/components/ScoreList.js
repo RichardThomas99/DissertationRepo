@@ -16,7 +16,7 @@ calcScore()
   var homeLocation = ["GB","United Kingdom","Reino Unido","UK"]
   var listed =[] ;
   var timeListed = "";
-
+  var size=0.0;
   Data.map(function(content,index)
   {
     score=50;
@@ -55,7 +55,7 @@ calcScore()
 
     //Size Component
     //If there is no size then there is no addition
-    var size = parseFloat((content.size).substring(3));
+    size = parseFloat((content.size).substring(3));
     if(size%1 <2)
     {
       if(size>=9)
@@ -93,6 +93,7 @@ printAllData(scores)
     <p>{content.size}</p>
     <p>{((content.location).split(','))[1]}</p>
     <p>{content.listed}</p>
+    <p>{content.url}</p>
     </div>
   })
 }
