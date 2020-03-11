@@ -15,7 +15,7 @@ function MainNav()
         <Link style = {mainNavStyle} to= "/TopListings">
           <li>Top Listings</li>
         </Link>
-        <Link style = {mainNavStyle} to= "/DataSets">
+        <Link style = {mainNavStyle} to= "/RealTimeAnalysis">
           <li>Real-Time Analysis</li>
         </Link>
         <Link style = {mainNavStyle} to= "/OverTimeAnalysis">

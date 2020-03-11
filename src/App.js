@@ -7,7 +7,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 //components
 import Settings from './Settings'
 import TopListings from './TopListings'
-import DataSets from './DataSets'
+import RealTimeAnalysis from './RealTimeAnalysis'
 import OverTimeAnalysis from './OverTimeAnalysis'
 import Nav from './components/Nav'
 import MainNav from './components/MainNav'
@@ -65,7 +65,7 @@ render()
 
 
         <Route path = "/Settings" component ={Settings}/>
-        <Route path = "/DataSets" component ={DataSets}/>
+        <Route path = "/RealTimeAnalysis" component ={RealTimeAnalysis}/>
         <Route path = "/TopListings" component ={TopListings}/>
         <Route path = "/OverTimeAnalysis" component ={OverTimeAnalysis}/>
 
