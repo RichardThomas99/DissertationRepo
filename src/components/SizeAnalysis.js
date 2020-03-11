@@ -10,9 +10,6 @@ class SizeAnalysis extends Component
   printSizeData(quantityArray, averagesArray)
   {
 
-
-    console.log(quantityArray[12]);
-
     //VERY USEFUL ALGORITHM FOR PAIRING ARRAYS TOGETHER.
     return averagesArray.map(function(e, i)
     {
@@ -155,7 +152,6 @@ class SizeAnalysis extends Component
 
   render()
   {
-    console.log(this.props);
     var sizeArray = [];
     var priceArray = [];
 
@@ -163,11 +159,11 @@ class SizeAnalysis extends Component
       Data.map((content,index)=>
       {
         if(content.size.length>2){
-          console.log("SIZE FOUND = " +content.size);
+          /*console.log("SIZE FOUND = " +content.size);*/
           sizeArray[index] =  parseFloat((content.size).substring(3));
         }
         else{
-          console.log("NO SIZE = " + this.getSize(content.desc));
+          /*console.log("NO SIZE = " + this.getSize(content.desc));*/
           sizeArray[index] = this.getSize(content.desc);
         }
         priceArray[index] = parseInt((content.price).substring(1));
