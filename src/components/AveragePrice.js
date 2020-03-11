@@ -27,7 +27,6 @@ class AveragePrice extends Component
 
     });
     var average = total/quantity;
-
     return average;
   }
 
@@ -37,8 +36,8 @@ class AveragePrice extends Component
     var lowerBound = 15.00;
     var upperBound = 160.00;
     var average = 0;
-    average = this.calcAvePrice();
-
+    average = this.calcAvePrice(upperBound,lowerBound);
+    console.log(average);
 
 
   return (
