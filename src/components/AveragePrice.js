@@ -1,48 +1,44 @@
 import React, {Component} from 'react';
+import Data from '../data/data.json';
 
 class AveragePrice extends Component
 {
-  //Gets average price of an array of floats. also takes input of maximum price and minimum prices.
-    getAveragePrice(priceArray,maxPriceTaken)
+
+  calcAvePrice(maxPrice, minPrice)
+  {
+    var total =0;
+    var price =0;
+    var quantity = 0;
+
+    Data.map(function(content,index)
     {
-          var fullCount = 0;
-          var acceptedCount =0;
-          var total = 0;
-          var temp = 0;
+      if((content.price).length>7)
+      {
 
-//***FULLCOUNT SHOULD START FROM *? ****************!!!!!!!!
-          while(priceArray[fullCount+1]!=null)
-          {
-            temp = parseFloat(priceArray[fullCount]);
+      }
 
-            if(temp<maxPriceTaken)
-            {
-              total = total + temp;
-              acceptedCount++;
-            }
+      price = parseInt((content.price).substring(1));
 
-            fullCount++;
-          }
+      if((price<maxPrice) &&(price>=minPrice))
+      {
+        total = total + price;
+        quantity++;
+      }
 
-          //Debugging logs
-          // console.log(fullCount)
-          // console.log(acceptedCount);
-          // console.log(total);
+    });
+    var average = total/quantity;
 
-          var average = total/acceptedCount;
-          return (average);
-    }
+    return average;
+  }
+
 
   render()
   {
-    var lowerBound = 0.00;
-    var upperBound = 250.00;
+    var lowerBound = 15.00;
+    var upperBound = 160.00;
     var average = 0;
+    average = this.calcAvePrice();
 
-    if(!this.props.loading)
-    {
-       average  = this.getAveragePrice(this.props.content,upperBound);
-    }
 
 
   return (

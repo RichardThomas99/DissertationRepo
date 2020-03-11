@@ -28,7 +28,7 @@ calcScore()
     // }
 
 
-    if(content.price.substring(0,1)!="£")
+    if(content.price.substring(0,1)!=="£")
     {
       console.log("The currency " + content.price.substring(0,1));
     }
@@ -36,19 +36,19 @@ calcScore()
     //Time Listed Component
     listed = content.listed;
     timeListed = (listed.split(" "))[2];
-    if(timeListed == "SECONDS")
+    if(timeListed === "SECONDS")
     {
       score += 8;
     }
-    else if(timeListed == "MINUTES")
+    else if(timeListed === "MINUTES")
     {
       score += 6;
     }
-    else if(timeListed == "DAYS")
+    else if(timeListed === "DAYS")
     {
       score += 3;
     }
-    else if(timeListed == "WEEKS")
+    else if(timeListed === "WEEKS")
     {
       score += 1;
     }
