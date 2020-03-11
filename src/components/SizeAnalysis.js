@@ -7,13 +7,20 @@ import {
 class SizeAnalysis extends Component
 {
 
-  printSizeData(quantity, average)
+  printSizeData(quantityArray, averagesArray)
   {
-    return quantity.map(average=>{
+
+
+    console.log(quantityArray[12]);
+
+    //VERY USEFUL ALGORITHM FOR PAIRING ARRAYS TOGETHER.
+    return averagesArray.map(function(e, i)
+    {
       return(
-        <p>{"£"+quantity + average}</p>
+        <p>{"Size["+((i+3)/2)+"] - Av Price = £"+averagesArray[i] + " - Quantity on Sale = " + quantityArray[i]}</p>
       )
-    })
+
+    });
 
   }
 
@@ -59,28 +66,24 @@ class SizeAnalysis extends Component
 
   }
 
-    getDistributionNew(sizeArray,priceArray)
+    getDistribution(sizeArray,priceArray)
     {
-      var count=0;
-      var sizeArrayLength = sizeArray.length;
-
       //25 one for each half size.
       var quantityArray = Array(25);
       var averagesArray = Array(25);
 
-      var z=25;
+      var sizeArrayLength = sizeArray.length;
+
       var maxSize = 13;
       var minSize = 3;
       var minPrice = 15.00;
       var maxPrice = 160.00;
 
+      var count =0;
       var temp =0;
+      var z=25;
       var y=0;
 
-      while(z--){
-        quantityArray[z] = 0;
-        averagesArray[z] = 0;
-      }
 
       for(count=0;count<sizeArrayLength;count++)
       {
@@ -90,6 +93,11 @@ class SizeAnalysis extends Component
 
             if((priceArray[count]<maxPrice) &&(priceArray[count]>=minPrice))
             {
+              if(isNaN(quantityArray[temp])){
+                quantityArray[temp]=0;
+                averagesArray[temp]=0;
+              }
+
               quantityArray[temp]++;
               averagesArray[temp] = averagesArray[temp] + priceArray[count];
             }
@@ -99,83 +107,18 @@ class SizeAnalysis extends Component
       for(y=0;y<25;y++)
       {
         averagesArray[y] = parseFloat(averagesArray[y])/parseFloat(quantityArray[y]);
-        if(averagesArray[y] === "NaN"){
+        if(isNaN(averagesArray[y])){
           averagesArray[y] = 0;
         }
-        temp = (y+3)/2;
-
-        console.log("average for size"+temp +": " + averagesArray[y]);
+        if(isNaN(quantityArray[y])){
+          quantityArray[y] = 0;
+        }
+        /*temp = (y+3)/2;
+        console.log("average for size"+temp +": " + averagesArray[y]);*/
       }
 
       return [quantityArray,averagesArray];
     }
-   //returned values:
-    getDistribution(array)
-    {
-      //Defining variables for method
-      var data = new Array(205);
-
-      var maxSize = 13;
-      var minSize = 3;
-
-      //25 one for each half size.
-      var quantityArray = Array(25);
-      var averagesArray = Array(25);
-
-      //Loop counter variables
-      var i;
-      var z;
-      var y;
-
-      var size;
-      var price;
-      var maxPriceTaken = 250.00;
-      var temp;
-
-
-      for ( i = 0; i < data.length; i++)
-      {
-        data[i] = new Array(3);
-      }
-      data=array;
-
-
-      z=25;
-      while(z--){
-        quantityArray[z] = 0;
-        averagesArray[z] = 0;
-      }
-
-      for(i=0;data[i+1] !=null;i++)
-      {
-        size = data[i][2];
-        price = parseFloat(data[i][1]);
-
-        if(size>=minSize && size<maxSize)
-        {
-            temp = (parseFloat(size)*2) -3;
-
-            if(price<maxPriceTaken)
-            {
-              quantityArray[temp]++;
-              averagesArray[temp] = averagesArray[temp] + price;
-            }
-        }
-      }
-
-      for(y=0;y<25;y++)
-      {
-        averagesArray[y] = parseFloat(averagesArray[y])/parseFloat(quantityArray[y]);
-        if(averagesArray[y] === "NaN"){
-          averagesArray[i] = 0;
-        }
-        temp = (y+3)/2;
-
-        //console.log("average for size"+temp +": " + averagesArray[y]);
-      }
-
-    return [quantityArray,averagesArray];
-  }
 
 
 //Applies regex to return size or -1 if unable to attain size.
@@ -234,8 +177,7 @@ class SizeAnalysis extends Component
       distribution[0] = new Array(25);
       distribution[1] = new Array(25);
 
-      distribution = this.getDistributionNew(sizeArray,priceArray);
-     /*distribution = this.getDistribution(x);*/
+      distribution = this.getDistribution(sizeArray,priceArray);
 
 
     return (
@@ -248,7 +190,7 @@ class SizeAnalysis extends Component
 
 
         <h3>Raw Size Data: </h3>
-      {/*this.printSizeData(distribution[0],distribution[1])*/}
+        {this.printSizeData(distribution[0],distribution[1])}
 
     </div>
   );
