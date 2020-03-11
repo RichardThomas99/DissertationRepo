@@ -8,8 +8,6 @@ class PriceDistributionGraph extends Component
 
   graph(array,bucketSize,maximumBucket,numOfBuckets)
   {
-    // console.log("array[0]" + array[0][0]);
-    // console.log("array[1]" + array[1][0]);
     var dataArray = Array(numOfBuckets);
 
     for(var i=0;i<numOfBuckets;i++)
@@ -101,7 +99,6 @@ class PriceDistributionGraph extends Component
 
   render()
   {
-    console.log(this.props);
 
     var bucketSize = 10;
     var maximumBucket = 200;

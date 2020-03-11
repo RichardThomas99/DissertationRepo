@@ -37,7 +37,6 @@ class AveragePrice extends Component
     var upperBound = 160.00;
     var average = 0;
     average = this.calcAvePrice(upperBound,lowerBound);
-    console.log(average);
 
 
   return (
