@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
 AreaChart, Area, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
-
+import Data from '../data/data.json';
 class PriceDistributionGraph extends Component
 {
 
@@ -54,7 +54,13 @@ class PriceDistributionGraph extends Component
 //returned values: c[0] = upperBucketSize, c[1] = count
   getDistribution(bucketSize,maximumBucket,numOfBuckets)
   {
-    var priceArray = this.props.array;
+    var priceArray = [];
+    Data.map(function(content,index)
+    {
+
+      priceArray[index] = parseInt((content.price).substring(1));
+    });
+
     var upperBucket;
     var bucket = Array(numOfBuckets);
     var upperArray = Array(numOfBuckets);
