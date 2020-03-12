@@ -49,7 +49,7 @@ render()
           <h1>TopListings</h1>
           <ScoreText/>
           <SearchBar/>
-          
+          <Product/>
           <ConvertCurrency/>
           <ScoreList/>
         </div>
