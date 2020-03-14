@@ -12,6 +12,8 @@ class StorePopUp extends Component
 
   this.state = {
     showMenu: false,
+    currentJSON: <Product/>,
+    saveLocation: "[Not Set]",
   };
 
   this.showMenu = this.showMenu.bind(this);
@@ -74,12 +76,6 @@ closeMenu(event) {
       var array = [];
       var count = 0;
       const databaseRef = firebase.database().ref("/");
-      const trainerRef = databaseRef.child('TrainerNameID');
-      const indexRef = trainerRef.child('IndexedValue');
-
-      console.log("databaseRef: " + databaseRef);
-      console.log("trainerRef: " + trainerRef);
-      console.log("indexRef: " + indexRef);
 
       databaseRef.on('value', function(snapshot){
         snapshot.forEach(function(childSnapshot,index){
@@ -90,7 +86,12 @@ closeMenu(event) {
           count++;
         });
       });
+      array[count] ="[New Save Location]";
       return array;
+  }
+  onSave(item)
+  {
+    this.setState({saveLocation: item});
   }
 
   dropdown(array)
@@ -98,24 +99,24 @@ closeMenu(event) {
     return(
       <div>
         <button onClick={this.showMenu}>
-          Show menu
+          Possible Save Locations
         </button>
 
-        {
-          this.state.showMenu
-            ? (
+        {this.state.showMenu? (
               <div
                 className="menu"
                 ref={(element) => {
                   this.dropdownMenu = element;
-                }}
-              >
-                {array.map(function(item, i){return <button>{item}</button>})}
-              </div>
-            )
-            : (
-              null
-            )
+                }}>
+                {array.map((item, i)=>{
+                    return(
+                      <button onClick={(e) => {e.preventDefault(); this.onSave(item);}}>
+                        {item}
+                      </button>
+                    );
+                  })}
+              </div>)
+              : (null)
         }
       </div>
     );
@@ -125,15 +126,16 @@ closeMenu(event) {
   render()
   {
     var array = this.getCollections();
+
   return (
     <div>
 
-    <h3>Current JSON contains = <Product/></h3>
-    <p>Settings behind this average are listed below. </p>
+    <h3>Current JSON contains = {this.state.currentJSON}</h3>
+    <p>Choose the save location of the new JSON from the dropdown below </p>
 
-    <ul>
+
     {this.dropdown(array)}
-    </ul>
+    <p>You are looking to put {this.state.currentJSON} in the location named: {this.state.saveLocation}</p>
 
     </div>
   );
