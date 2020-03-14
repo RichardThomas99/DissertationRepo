@@ -61,15 +61,23 @@ getProduct()
 }
 writeToFirebase()
 {
-  var product = this.getProduct();
+  var product;
+  if(this.props.term.length>3)
+  {
+    product = this.props.term;
+  }
+  else {
+    product = this.getProduct();
+  }
+
   {this.writeData(product)}
   {this.writeRawJSON(product)}
 }
 
 render()
 {
-  console.log("PROPS "+this.props.term);
-
+  console.log("PROPS = "+this.props.term);
+  this.writeToFirebase();
 
   return(
   <p>Upload Success</p>
