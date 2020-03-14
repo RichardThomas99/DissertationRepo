@@ -18,7 +18,7 @@ class productInJson extends Component
         product = (((Data[i].desc).split('\r\n'))[0]);
       }
     }
-  
+
   return (
     <div>
       <h4>{product}</h4>

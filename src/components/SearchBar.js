@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import'../App.css';
 import UploadScrape from '../dataManipulationScripts/uploadScrape.js'
+import Product from './productInJson'
 
 class SearchBar extends Component
 {
@@ -37,7 +38,7 @@ class SearchBar extends Component
 render()
 {
   const upload = this.state.visible ? (
-    <UploadScrape/>
+    <UploadScrape product=<Product/>/>
   ):(<div/>);
 
   return(

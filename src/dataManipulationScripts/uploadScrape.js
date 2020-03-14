@@ -5,9 +5,9 @@ import * as firebase from 'firebase';
 class uploadScrape extends Component
 {
 
-writeData()
+writeData(product)
 {
-  const trainerRef = firebase.database().ref().child('TrainerNameID');
+  const trainerRef = firebase.database().ref().child(product);
   const indexRef = trainerRef.child('IndexedValue');
   var dataArray = [];
   var currentDate = new Date();
@@ -20,10 +20,10 @@ writeData()
 
   indexRef.push(dataArray)
 }
-writeRawJSON()
+writeRawJSON(product)
 {
   var dataArray = [];
-  const trainerRef = firebase.database().ref().child('TrainerNameID');
+  const trainerRef = firebase.database().ref().child(product);
   const indexRef = trainerRef.child('IndexedValue');
 
   Data.map(function(content,index)
@@ -43,12 +43,29 @@ writeRawJSON()
   });
     return 0;
 }
+getProduct()
+{
+  var product;
+  var i=0;
+  var length =0;
 
+  for(i=0;i<5;i++)
+  {
+    if(((Data[i].desc).split('\r\n'))[0].length >length)
+    {
+      product = (((Data[i].desc).split('\r\n'))[0]);
+    }
+  }
+  product = product.replace(/ /g,'');
+  return product;
+}
 writeToFirebase()
 {
-  {this.writeData()}
-  {this.writeRawJSON()}
+  var product = this.getProduct();
+  {this.writeData(product)}
+  {this.writeRawJSON(product)}
 }
+
 render()
 {
   {this.writeToFirebase()}
