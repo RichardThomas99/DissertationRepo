@@ -3,6 +3,7 @@ import Data from '../data/data.json';
 import Product from './productInJson'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import * as firebase from 'firebase';
+import UploadScrape from '../dataManipulationScripts/uploadScrape.js'
 
 class StorePopUp extends Component
 {
@@ -10,10 +11,13 @@ class StorePopUp extends Component
   constructor() {
   super();
 
+//THIS NEEDS MAJOR REFACTORING TO RE ORDER THESE METHODS TO A MOST OPTIMAL SOLUTION...
+
   this.state = {
     showMenu: false,
     currentJSON: <Product/>,
     saveLocation: "[Not Set]",
+    visible:false,
   };
 
   this.showMenu = this.showMenu.bind(this);
@@ -126,6 +130,9 @@ closeMenu(event) {
   render()
   {
     var array = this.getCollections();
+    const upload = this.state.visible ? (
+      <UploadScrape term = {this.state.saveLocation}/>
+    ):(<div/>);
 
   return (
     <div>
@@ -136,7 +143,10 @@ closeMenu(event) {
 
     {this.dropdown(array)}
     <p>You are looking to put {this.state.currentJSON} in the location named: {this.state.saveLocation}</p>
-
+    <button onClick={() => {this.setState({visible: !this.state.visible});}}>
+      CONFIRM SAVE
+    </button>
+    {upload}
     </div>
   );
  }

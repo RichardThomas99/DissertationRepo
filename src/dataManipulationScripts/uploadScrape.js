@@ -68,7 +68,9 @@ writeToFirebase()
 
 render()
 {
-  {this.writeToFirebase()}
+  console.log("PROPS "+this.props.term);
+
+
   return(
   <p>Upload Success</p>
   );

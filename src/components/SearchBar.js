@@ -38,7 +38,7 @@ class SearchBar extends Component
 render()
 {
   const upload = this.state.visible ? (
-    <UploadScrape product=<Product/>/>
+    <UploadScrape/>
   ):(<div/>);
 
   return(
