@@ -4,11 +4,50 @@ import * as firebase from 'firebase';
 
 class uploadScrape extends Component
 {
+  constructor()
+  {
+    super();
+    this.state = {
+      date: this.currentDate(),
+    };
+  }
 
+  currentDate()
+  {
+    var today = new Date();
+    var date = today.getFullYear()+'_'+(today.getMonth()+1)+'_'+today.getDate();
+    console.log("DATE = " + date);
+    return date;
+  }
+  checkIfDateIsWritten(currentDate)
+  {
+      var date = this.state.date;
+      var snapshot;
+      var array = [];
+      var count = 0;
+      const databaseRef = firebase.database().ref("/");
+
+      databaseRef.on('value', function(snapshot){
+        snapshot.forEach(function(childSnapshot,index){
+          childSnapshot.forEach(function(childChildSnapshot,index){
+
+            var childChildKey = childChildSnapshot.key;
+            console.log("child child key = " + childChildKey);
+            if(date == childChildKey)
+            {
+              console.log("Date matches");
+              return false;
+            }
+          });
+        });
+      });
+      return true;
+  }
 writeData(product)
 {
+  var date = this.state.date;
   const trainerRef = firebase.database().ref().child(product);
-  const indexRef = trainerRef.child('IndexedValue');
+  const indexRef = trainerRef.child(date);
   var dataArray = [];
   var currentDate = new Date();
   var formattedDate = currentDate.getFullYear()+"-"+currentDate.getMonth()+1+"-"+currentDate.getDate()+ " " + currentDate.getHours() + ":" + currentDate.getMinutes();
@@ -23,8 +62,9 @@ writeData(product)
 writeRawJSON(product)
 {
   var dataArray = [];
+  var date = this.state.date;
   const trainerRef = firebase.database().ref().child(product);
-  const indexRef = trainerRef.child('IndexedValue');
+  const indexRef = trainerRef.child(date);
 
   Data.map(function(content,index)
   {
@@ -69,13 +109,16 @@ writeToFirebase()
   else {
     product = this.getProduct();
   }
-
-  {this.writeData(product)}
-  {this.writeRawJSON(product)}
+  if(this.checkIfDateIsWritten())
+  {
+    this.writeData(product)
+    this.writeRawJSON(product)
+  }
 }
 
 render()
 {
+console.log("State = "+this.state.date);
   console.log("PROPS = "+this.props.term);
   this.writeToFirebase();
 
