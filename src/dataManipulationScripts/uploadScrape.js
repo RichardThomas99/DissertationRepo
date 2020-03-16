@@ -25,6 +25,7 @@ class uploadScrape extends Component
       var snapshot;
       var array = [];
       var count = 0;
+      var unique = true;
       const databaseRef = firebase.database().ref("/");
 
       databaseRef.on('value', function(snapshot){
@@ -35,30 +36,14 @@ class uploadScrape extends Component
             if(date == childChildKey)
             {
               console.log("Date matches");
-              return false;
+              unique = false;
             }
           });
         });
       });
-      return true;
+      return unique;
   }
 writeData(product)
-{
-  var date = this.state.date;
-  const trainerRef = firebase.database().ref().child(product);
-  const indexRef = trainerRef.child(date);
-  var dataArray = [];
-  var currentDate = new Date();
-  var formattedDate = currentDate.getFullYear()+"-"+currentDate.getMonth()+1+"-"+currentDate.getDate()+ " " + currentDate.getHours() + ":" + currentDate.getMinutes();
-
-  dataArray =
-  {
-    time: formattedDate
-  };
-
-  indexRef.push(dataArray)
-}
-writeRawJSON(product)
 {
   var dataArray = [];
   var date = this.state.date;
@@ -116,8 +101,7 @@ writeToFirebase()
 
   if(this.checkIfDateIsWritten())
   {
-    this.writeData(product)
-    this.writeRawJSON(product)
+    this.writeData(product);
   }
 }
 
