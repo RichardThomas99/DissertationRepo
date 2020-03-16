@@ -5,9 +5,6 @@ import Product from './productInJson'
 
 class SearchBar extends Component
 {
-  state = {
-    visible: false
-  };
 
   httpGet(searchTerm)
   {
@@ -37,9 +34,6 @@ class SearchBar extends Component
 
 render()
 {
-  const upload = this.state.visible ? (
-    <UploadScrape/>
-  ):(<div/>);
 
   return(
     <div class = "searchDiv">
@@ -48,10 +42,8 @@ render()
           <input id = "textSearch"  type="text" name="product" placeholder ="Search a Product..." />
         </label>
           <button onClick = {(e) => {e.preventDefault(); this.submit();}}> Submit Search </button>
-          <button onClick = {() => {this.setState({visible: !this.state.visible});}}> Store Data </button>
         </form>
 
-        {upload}
       </div>
     );
 }
