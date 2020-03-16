@@ -102,23 +102,33 @@ closeMenu(event) {
 
           var childKey = childSnapshot.key;
           var childData = childSnapshot.val();
+          //Date
           console.log("child key = " + childKey);
           console.log("child Data = "+ childData);
 
           childSnapshot.forEach(function(childChildSnapshot){
             var childChildKey = childChildSnapshot.key;
-            var childChildData = childChildSnapshot.val();
 
+            //Data/Preamble
             console.log("Child child key = " + childChildKey);
-            console.log("Child child Data = "+ childChildData);
 
             childChildSnapshot.forEach(function(childChildChildSnapshot){
               var childChildChildKey = childChildChildSnapshot.key;
-              var childChildChildData = childChildChildSnapshot.val();
 
+              //Unique key
               console.log("Child child child key = " + childChildChildKey);
-              console.log("Child child child Data = "+ childChildChildData);
+
+              childChildChildSnapshot.forEach(function(childChildChildChildSnapshot){
+                var childChildChildChildKey = childChildChildChildSnapshot.key;
+                var childChildChildChildData = childChildChildChildSnapshot.val();
+
+                //Actual Data
+                console.log(childChildChildChildKey +" = "+ childChildChildChildData);
+
+
+              });
             });
+
           });
         });
       });

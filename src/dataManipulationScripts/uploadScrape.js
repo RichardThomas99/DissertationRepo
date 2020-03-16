@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Data from '../data/data.json'
 import * as firebase from 'firebase';
-
+import Preamble from './PreambleData';
 class uploadScrape extends Component
 {
   constructor()
@@ -129,9 +129,13 @@ writeToFirebase()
 render()
 {
   this.writeToFirebase();
-
+  var pre = <Preamble/>;
+  console.log("pre = " + pre);
   return(
+    <div>
   <p>Upload Success</p>
+  <Preamble/>
+  </div>
   );
 }
 }
