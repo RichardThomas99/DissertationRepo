@@ -32,7 +32,6 @@ class uploadScrape extends Component
           childSnapshot.forEach(function(childChildSnapshot,index){
 
             var childChildKey = childChildSnapshot.key;
-            console.log("child child key = " + childChildKey);
             if(date == childChildKey)
             {
               console.log("Date matches");
@@ -105,10 +104,16 @@ writeToFirebase()
   if(this.props.term.length>3)
   {
     product = this.props.term;
+    if(product == "[New Save Location]")
+    {
+      product = this.getProduct();
+    }
   }
   else {
     product = this.getProduct();
   }
+  console.log(product);
+
   if(this.checkIfDateIsWritten())
   {
     this.writeData(product)
@@ -118,8 +123,6 @@ writeToFirebase()
 
 render()
 {
-console.log("State = "+this.state.date);
-  console.log("PROPS = "+this.props.term);
   this.writeToFirebase();
 
   return(
