@@ -43,36 +43,7 @@ closeMenu(event) {
   }
 }
 
-  /* componentDidMount()
-  {
-      var snapshot;
-      const databaseRef = firebase.database().ref("/");
-      const trainerRef = databaseRef.child('TrainerNameID');
-      const indexRef = trainerRef.child('IndexedValue');
 
-      console.log("databaseRef: " + databaseRef);
-      console.log("trainerRef: " + trainerRef);
-      console.log("indexRef: " + indexRef);
-
-      indexRef.on('value', function(snapshot){
-        snapshot.forEach(function(childSnapshot){
-
-          var childKey = childSnapshot.key;
-          var childData = childSnapshot.val();
-          console.log("child key = " + childKey);
-          console.log("child Data = "+ childData);
-
-          childSnapshot.forEach(function(childChildSnapshot){
-            var childChildKey = childChildSnapshot.key;
-            var childChildData = childChildSnapshot.val();
-
-            console.log("Child child key = " + childChildKey);
-            console.log("Child child Data = "+ childChildData);
-          });
-        });
-      });
-      return 0;
-  }*/
 
   getCollections()
   {
