@@ -43,12 +43,33 @@ class uploadScrape extends Component
       });
       return unique;
   }
-writeData(product)
+writePreambleData(product)
 {
   var dataArray = [];
   var date = this.state.date;
   const trainerRef = firebase.database().ref().child(product);
-  const indexRef = trainerRef.child(date);
+  const dateRef = trainerRef.child(date);
+  const preambleRef = dateRef.child("Preamble");
+
+  dataArray =
+  {
+    date: date,
+    averagePrice: 99.99,
+    averageListing: "20 Hours",
+  };
+
+    preambleRef.push(dataArray)
+
+    return 0;
+}
+writeData(product)
+{
+  var dataArray = [];
+  var date = this.state.date;
+
+  const trainerRef = firebase.database().ref().child(product);
+  const dateRef = trainerRef.child(date);
+  const dataRef = dateRef.child("Data");
 
   Data.map(function(content,index)
   {
@@ -63,7 +84,7 @@ writeData(product)
       listed: content.listed
     };
 
-    indexRef.push(dataArray)
+    dataRef.push(dataArray)
   });
     return 0;
 }
@@ -85,9 +106,11 @@ getProduct()
 }
 writeToFirebase()
 {
-  var product;
-  if((this.props.term.length<4)||(product == "[New Save Location]") ||(product =="[Not Set]"))
+  var product = this.props.term;
+  console.log("product = " + product);
+  if((product.length<4)||(product == "[New Save Location]") ||(product =="[Not Set]"))
   {
+    console.log("product = " + product);
     product = this.getProduct();
   }
   else
@@ -98,6 +121,7 @@ writeToFirebase()
 
   if(this.checkIfDateIsWritten())
   {
+    this.writePreambleData(product);
     this.writeData(product);
   }
 }

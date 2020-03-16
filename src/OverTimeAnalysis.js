@@ -111,6 +111,14 @@ closeMenu(event) {
 
             console.log("Child child key = " + childChildKey);
             console.log("Child child Data = "+ childChildData);
+
+            childChildSnapshot.forEach(function(childChildChildSnapshot){
+              var childChildChildKey = childChildChildSnapshot.key;
+              var childChildChildData = childChildChildSnapshot.val();
+
+              console.log("Child child child key = " + childChildChildKey);
+              console.log("Child child child Data = "+ childChildChildData);
+            });
           });
         });
       });
