@@ -86,16 +86,13 @@ getProduct()
 writeToFirebase()
 {
   var product;
-  if(this.props.term.length>3)
+  if((this.props.term.length<4)||(product == "[New Save Location]") ||(product =="[Not Set]"))
   {
-    product = this.props.term;
-    if(product == "[New Save Location]")
-    {
-      product = this.getProduct();
-    }
-  }
-  else {
     product = this.getProduct();
+  }
+  else
+  {
+      product = this.props.term;
   }
   console.log(product);
 
