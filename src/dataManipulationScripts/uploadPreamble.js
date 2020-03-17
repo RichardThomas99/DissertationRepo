@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Data from '../data/data.json'
 import * as firebase from 'firebase';
+import Preamble from './PreambleData';
 
 class uploadScrape extends Component
 {
@@ -35,8 +36,16 @@ class uploadScrape extends Component
             var childChildKey = childChildSnapshot.key;
             if(date == childChildKey)
             {
-              console.log("Date matches");
-              unique = false;
+              childChildSnapshot.forEach(function(childChildChildSnapshot,index)
+              {
+                var childChildChildKey = childChildChildSnapshot.key;
+
+                if(childChildChildKey == "Preamble")
+                {
+                  console.log("Date matches");
+                  unique = false;
+                }
+              });
             }
           });
         });
@@ -60,32 +69,6 @@ writePreambleData(product)
 
     preambleRef.push(dataArray)
 
-    return 0;
-}
-writeData(product)
-{
-  var dataArray = [];
-  var date = this.state.date;
-
-  const trainerRef = firebase.database().ref().child(product);
-  const dateRef = trainerRef.child(date);
-  const dataRef = dateRef.child("Data");
-
-  Data.map(function(content,index)
-  {
-    dataArray =
-    {
-      price: content.price,
-      seller: content.seller,
-      desc: content.desc,
-      price: content.price,
-      size: content.size,
-      location: content.location,
-      listed: content.listed
-    };
-
-    dataRef.push(dataArray)
-  });
     return 0;
 }
 getProduct()
@@ -117,21 +100,21 @@ writeToFirebase()
   {
       product = this.props.term;
   }
+
   console.log(product);
 
   if(this.checkIfDateIsWritten())
   {
-    this.writeData(product);
+    this.writePreambleData(product);
   }
 }
 
 render()
 {
   this.writeToFirebase();
-
   return(
-    <div>
-  <p>Upload Success</p>
+  <div>
+    <p>Upload Success</p>
   </div>
   );
 }

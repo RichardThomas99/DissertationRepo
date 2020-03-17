@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Data from '../data/data.json';
 
-class PreambleData extends Component
+class CalcAveragePrice extends Component
 {
 
   calcAvePrice(maxPrice, minPrice)
@@ -33,18 +33,16 @@ class PreambleData extends Component
 
   render()
   {
-    var lowerBound = 15.00;
-    var upperBound = 160.00;
+    var lowerBound = this.props.lowerBound;
+    var upperBound = this.props.upperBound;
     var average = 0;
     average = this.calcAvePrice(upperBound,lowerBound);
-
-
+    
   return (
-
-      average
+    <h3>{average}</h3>
 
   );
  }
 }
 
-export default PreambleData;
+export default CalcAveragePrice;
