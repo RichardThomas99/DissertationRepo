@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Data from '../data/data.json'
 import * as firebase from 'firebase';
-import Preamble from './PreambleData';
 
 class uploadScrape extends Component
 {
@@ -40,9 +39,10 @@ class uploadScrape extends Component
               {
                 var childChildChildKey = childChildChildSnapshot.key;
 
+                console.log("PREAMBLE CHILDCHILDCHILD BIT");
                 if(childChildChildKey == "Preamble")
                 {
-                  console.log("Date matches");
+                  console.log(" PREAMBLE Date matches = " + childChildChildKey);
                   unique = false;
                 }
               });
@@ -56,15 +56,16 @@ writePreambleData(product)
 {
   var dataArray = [];
   var date = this.state.date;
+  var dataName = this.props.dataName;
+  var data = this.props.data;
+
   const trainerRef = firebase.database().ref().child(product);
   const dateRef = trainerRef.child(date);
   const preambleRef = dateRef.child("Preamble");
 
   dataArray =
   {
-    date: date,
-    averagePrice: 99.99,
-    averageListing: "20 Hours",
+    dataName: data,
   };
 
     preambleRef.push(dataArray)
@@ -89,8 +90,9 @@ getProduct()
 }
 writeToFirebase()
 {
-  var product = this.props.term;
+  var product = this.props.product;
   console.log("product = " + product);
+
   if((product.length<4)||(product == "[New Save Location]") ||(product =="[Not Set]"))
   {
     console.log("product = " + product);
@@ -111,10 +113,12 @@ writeToFirebase()
 
 render()
 {
+    console.log("IN UPLOAD PREAMBLE*******");
   this.writeToFirebase();
+
   return(
   <div>
-    <p>Upload Success</p>
+    <p>Upload Successful</p>
   </div>
   );
 }

@@ -2,12 +2,16 @@ import React, {Component} from 'react';
 import Data from '../data/data.json'
 import * as firebase from 'firebase';
 
+import UploadPreamble from '../dataManipulationScripts/uploadPreamble.js';
+
 class uploadScrape extends Component
 {
   constructor()
   {
     super();
     this.state = {
+      visible: false,
+      product: "none",
       date: this.currentDate(),
     };
   }
@@ -43,30 +47,13 @@ class uploadScrape extends Component
       });
       return unique;
   }
-writePreambleData(product)
+
+writeData()
 {
   var dataArray = [];
   var date = this.state.date;
-  const trainerRef = firebase.database().ref().child(product);
-  const dateRef = trainerRef.child(date);
-  const preambleRef = dateRef.child("Preamble");
-
-  dataArray =
-  {
-    date: date,
-    averagePrice: 99.99,
-    averageListing: "20 Hours",
-  };
-
-    preambleRef.push(dataArray)
-
-    return 0;
-}
-writeData(product)
-{
-  var dataArray = [];
-  var date = this.state.date;
-
+  var product = this.state.product;
+  console.log("asdfasdf product "+product);
   const trainerRef = firebase.database().ref().child(product);
   const dateRef = trainerRef.child(date);
   const dataRef = dateRef.child("Data");
@@ -106,32 +93,46 @@ getProduct()
 }
 writeToFirebase()
 {
-  var product = this.props.term;
-  console.log("product = " + product);
-  if((product.length<4)||(product == "[New Save Location]") ||(product =="[Not Set]"))
+  var productTitle = this.props.term;
+  console.log("product = " + productTitle);
+  if((productTitle.length<4)||(productTitle == "[New Save Location]") ||(productTitle =="[Not Set]"))
   {
-    console.log("product = " + product);
-    product = this.getProduct();
+    console.log("product = " + productTitle);
+    productTitle = this.getProduct();
   }
   else
   {
-      product = this.props.term;
+      productTitle = this.props.term;
   }
-  console.log(product);
+  console.log(productTitle);
 
   if(this.checkIfDateIsWritten())
   {
-    this.writeData(product);
+      this.setState({product: productTitle, visible: !this.state.visible}, function () {
+    console.log("product state = "+this.state.product);
+    this.writeData();
+});
+      console.log("asdfasdf state product = " + this.state.product);
+
   }
 }
 
 render()
 {
-  this.writeToFirebase();
+  var uploadPreamble="";
+  this.writeToFirebase( function () {
+     uploadPreamble = this.state.visible ? (
+
+        <UploadPreamble product = {this.state.product} dataName = "average" data = "56.80"/>
+      ):(<div/>);
+      console.log("asdfasdfasdf state state product = "+this.state.product);
+});
+
 
   return(
     <div>
-  <p>Upload Success</p>
+    {uploadPreamble}
+    <p>Upload Success</p>
   </div>
   );
 }

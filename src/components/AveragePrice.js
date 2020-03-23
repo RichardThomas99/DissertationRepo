@@ -15,7 +15,7 @@ class AveragePrice extends Component
   return (
     <div>
 
-    <h3>Average Price: £<CalcAveragePrice upperBound= {upperBound} lowerBound = {lowerBound}/></h3>
+    <h3>Average Price: £<CalcAveragePrice saveData = {false} upperBound= {upperBound} lowerBound = {lowerBound}/></h3>
     <p>Settings behind this average are listed below. </p>
       <ul id="content-list">
           <li>Original Array Used = Untampered</li>

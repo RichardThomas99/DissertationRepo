@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Data from '../data/data.json';
+import UploadPreamble from './uploadPreamble.js';
 
 class CalcAveragePrice extends Component
 {
@@ -35,12 +36,23 @@ class CalcAveragePrice extends Component
   {
     var lowerBound = this.props.lowerBound;
     var upperBound = this.props.upperBound;
+    var product = this.props.product;
+    var dataName = "AveragePrice";
     var average = 0;
+    console.log("IN CALV AVERAGE PRICE*******1");
     average = this.calcAvePrice(upperBound,lowerBound);
-    
+
+    console.log("IN CALV AVERAGE PRICE*******");
+
+    if(this.props.saveData == true)
+    {
+
+      console.log("IN CALC AVERAGE PRICE SAVE DATA*******");
+      return(<UploadPreamble product = {product} dataName = {dataName} data = {average}/>);
+    }
+
   return (
     <h3>{average}</h3>
-
   );
  }
 }
