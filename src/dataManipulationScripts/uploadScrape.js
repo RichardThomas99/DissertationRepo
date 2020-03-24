@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Data from '../data/data.json'
 import * as firebase from 'firebase';
 
-import UploadPreamble from '../dataManipulationScripts/uploadPreamble.js';
 
 class uploadScrape extends Component
 {
@@ -10,7 +9,6 @@ class uploadScrape extends Component
   {
     super();
     this.state = {
-      visible: false,
       product: "none",
       date: this.currentDate(),
     };
@@ -48,12 +46,169 @@ class uploadScrape extends Component
       return unique;
   }
 
+  getDistribution(sizeArray,priceArray)
+  {
+    //25 one for each half size.
+    var quantityArray = Array(25);
+    var averagesArray = Array(25);
+
+    var sizeArrayLength = sizeArray.length;
+
+    var maxSize = 13;
+    var minSize = 3;
+    var minPrice = 15.00;
+    var maxPrice = 160.00;
+
+    var count =0;
+    var temp =0;
+    var z=25;
+    var y=0;
+
+
+    for(count=0;count<sizeArrayLength;count++)
+    {
+      if(sizeArray[count]>=minSize && sizeArray[count]<maxSize)
+      {
+          temp = (parseFloat(sizeArray[count])*2)-3;
+
+          if((priceArray[count]<maxPrice) &&(priceArray[count]>=minPrice))
+          {
+            if(isNaN(quantityArray[temp])){
+              quantityArray[temp]=0;
+              averagesArray[temp]=0;
+            }
+
+            quantityArray[temp]++;
+            averagesArray[temp] = averagesArray[temp] + priceArray[count];
+          }
+      }
+    }
+
+    for(y=0;y<25;y++)
+    {
+      averagesArray[y] = parseFloat(averagesArray[y])/parseFloat(quantityArray[y]);
+      if(isNaN(averagesArray[y])){
+        averagesArray[y] = 0;
+      }
+      if(isNaN(quantityArray[y])){
+        quantityArray[y] = 0;
+      }
+      temp = (y+3)/2;
+      console.log("average for size"+temp +": " + averagesArray[y]);
+    }
+
+    return [quantityArray,averagesArray];
+  }
+
+
+//Applies regex to return size or -1 if unable to attain size.
+getSize(desc)
+{
+  var regexOut;
+  //Size __ 3.
+  const re = /size.(\d\d?(?:\.5)?)/i;
+  //UK 3.
+  const re2 = /uk.?(\d\d?(?:\.5)?)/i;
+  //Size 4.
+  const re3 = /size.\w*\W*.?(\d\d?(?:\.5)?)/i;
+
+  if(re.exec(desc) != null){
+    regexOut = re.exec(desc);
+    //console.log("re: "+ regexOut[1]);
+    return regexOut[1];
+  }
+  else if(re2.exec(desc) != null){
+    regexOut = re2.exec(desc);
+    //console.log("re2: "+ regexOut[1]);
+    return regexOut[1];
+  }
+  else if (re3.exec(desc) != null){
+    regexOut = re3.exec(desc);
+    //console.log("re3: "+ regexOut[1]);
+    return regexOut[1];
+  }
+  else{
+    return -1;
+  }
+}
+  calcPreambleData( )
+  {
+    var totalPrice =0;
+    var price =0;
+    var quantity = 0;
+    var minPrice = 15.00;
+    var maxPrice = 160.00;
+
+    var sizeArray = [];
+    var priceArray = [];
+
+    Data.map((content,index)=>
+    {
+      /*Price calculations .... */
+      if((content.price).length>7)
+      {
+
+      }
+
+      price = parseInt((content.price).substring(1));
+
+      if((price<maxPrice) &&(price>=minPrice))
+      {
+        totalPrice = totalPrice + price;
+        quantity++;
+      }
+
+      /*size Distribution .....................................................*/
+      if(content.size.length>2){
+        /*console.log("SIZE FOUND = " +content.size);*/
+        sizeArray[index] =  parseFloat((content.size).substring(3));
+      }
+      else{
+        /*console.log("NO SIZE = " + this.getSize(content.desc));*/
+        sizeArray[index] = this.getSize(content.desc);
+      }
+      priceArray[index] = parseInt((content.price).substring(1));
+    });
+
+    var distribution = Array(2);
+    distribution[0] = new Array(25);
+    distribution[1] = new Array(25);
+
+    distribution = this.getDistribution(sizeArray,priceArray);
+
+    var averagePrice = totalPrice/quantity;
+    return [averagePrice,minPrice,maxPrice,distribution[0],distribution[1]];
+  }
+  writePreambleData()
+  {
+    var dataArray = [];
+    var date = this.state.date;
+    var product = this.state.product;
+    const trainerRef = firebase.database().ref().child(product);
+    const dateRef = trainerRef.child(date);
+    const preambleRef = dateRef.child("Preamble");
+
+
+    var preambleData = this.calcPreambleData();
+    dataArray =
+    {
+      averagePrice: preambleData[0],
+      minPrice: preambleData[1],
+      maxPrice: preambleData[2],
+      quantPerSize: preambleData[3],
+      pricePerSize: preambleData[4],
+    };
+
+      preambleRef.push(dataArray)
+
+      return 0;
+  }
 writeData()
 {
   var dataArray = [];
   var date = this.state.date;
   var product = this.state.product;
-  console.log("asdfasdf product "+product);
+  console.log("asdfasggggggdf product "+product);
   const trainerRef = firebase.database().ref().child(product);
   const dateRef = trainerRef.child(date);
   const dataRef = dateRef.child("Data");
@@ -108,8 +263,9 @@ writeToFirebase()
 
   if(this.checkIfDateIsWritten())
   {
-      this.setState({product: productTitle, visible: !this.state.visible}, function () {
+      this.setState({product: productTitle}, function () {
     console.log("product state = "+this.state.product);
+    this.writePreambleData();
     this.writeData();
 });
       console.log("asdfasdf state product = " + this.state.product);
@@ -119,19 +275,12 @@ writeToFirebase()
 
 render()
 {
-  var uploadPreamble="";
-  this.writeToFirebase( function () {
-     uploadPreamble = this.state.visible ? (
+  this.writeToFirebase();
 
-        <UploadPreamble product = {this.state.product} dataName = "average" data = "56.80"/>
-      ):(<div/>);
-      console.log("asdfasdfasdf state state product = "+this.state.product);
-});
 
 
   return(
     <div>
-    {uploadPreamble}
     <p>Upload Success</p>
   </div>
   );
