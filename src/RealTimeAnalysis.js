@@ -7,6 +7,7 @@ import AveragePrice from './components/AveragePrice';
 import SizeAnalysis from './components/SizeAnalysis';
 import Data from './data/data.json';
 import Product from './components/productInJson'
+import ListedTimeDistribution from './components/ListedTimeDistribution.js'
 
 class RealTimeAnalysis extends Component
 {
@@ -29,6 +30,10 @@ render()
           <h2>*****************************************************************************************</h2>
 
           <SizeAnalysis/>
+
+          <h2>*****************************************************************************************</h2>
+
+          <ListedTimeDistribution/>
 
         </div>
       );
