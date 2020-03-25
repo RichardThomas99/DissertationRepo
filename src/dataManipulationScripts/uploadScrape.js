@@ -135,12 +135,17 @@ getSize(desc)
   {
     var totalPrice =0;
     var price =0;
-    var quantity = 0;
+    var quantityPrice = 0;
     var minPrice = 15.00;
     var maxPrice = 160.00;
 
     var sizeArray = [];
     var priceArray = [];
+
+    var timeTerm="";
+    var timeVal ="";
+    var totalListed = 0;
+    var quantityListed = 0;
 
     Data.map((content,index)=>
     {
@@ -155,7 +160,7 @@ getSize(desc)
       if((price<maxPrice) &&(price>=minPrice))
       {
         totalPrice = totalPrice + price;
-        quantity++;
+        quantityPrice++;
       }
 
       /*size Distribution .....................................................*/
@@ -168,7 +173,7 @@ getSize(desc)
         sizeArray[index] = this.getSize(content.desc);
       }
       priceArray[index] = parseInt((content.price).substring(1));
-    });
+
 
     var distribution = Array(2);
     distribution[0] = new Array(25);
@@ -176,8 +181,34 @@ getSize(desc)
 
     distribution = this.getDistribution(sizeArray,priceArray);
 
+
+
+    timeTerm = (content.listed).split(" ")[2];
+    timeVal = parseInt((content.listed).split(" ")[1]);
+
+    if(timeTerm === "MINUTES" || timeTerm === "MINUTE")
+    {
+      timeVal = timeVal/60;
+    }
+    if(timeTerm === "DAYS" || timeTerm === "DAY")
+    {
+      timeVal = timeVal*24;
+    }
+    if(timeTerm === "WEEKS" || timeTerm === "WEEK")
+    {
+      timeVal = timeVal*168;
+    }
+    if(timeTerm === "MONTHS" || timeTerm === "MONTH")
+    {
+      timeVal = timeVal*744;
+    }
+
+    totalListed = totalListed + timeVal;
+    quantityListed++;
+    });
+    var averageListed = totalListed/quantity;
     var averagePrice = totalPrice/quantity;
-    return [averagePrice,minPrice,maxPrice,distribution[0],distribution[1]];
+    return [averagePrice,minPrice,maxPrice,distribution[0],distribution[1],averageListed];
   }
   writePreambleData()
   {
