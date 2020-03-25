@@ -1,11 +1,56 @@
 import React, {Component} from 'react';
+import * as firebase from 'firebase';
 
 class DecayRate extends Component
 {
 
+  calcDecayRate(item)
+  {
+      var snapshot;
+      const databaseRef = firebase.database().ref("/");
+      const trainerRef = databaseRef.child(item);
+      var total =0;
+      var quantity=0;
+
+      console.log("databaseRef: " + databaseRef);
+      console.log("trainerRef: " + trainerRef);
+
+      trainerRef.on('value', function(snapshot){
+        snapshot.forEach(function(childSnapshot){
+
+          childSnapshot.forEach(function(childChildSnapshot){
+            var childChildKey = childChildSnapshot.key;
+
+            //Data/Preamble
+            if(childChildKey == "Preamble")
+            {
+              childChildSnapshot.forEach(function(childChildChildSnapshot){
+                var childChildChildKey = childChildChildSnapshot.key;
+
+                childChildChildSnapshot.forEach(function(childChildChildChildSnapshot){
+                  var preambleKey = childChildChildChildSnapshot.key;
+                  var preambleData = childChildChildChildSnapshot.val();
+
+                  //Actual Data
+                  console.log(preambleKey +" = "+ preambleData);
+                  if(preambleKey = "averageListed")
+                  {
+                    total = total + parseFloat(preambleData);
+                  }
+
+                });
+              });
+            }
+
+          });
+        });
+      });
+      var 
+    return 0;
+  }
   render()
   {
-    var decayRate = 0.0;
+    var decayRate = this.calcDecayRate("NIKEAIRMAX97SILVERBULLETVAPOURMAX");
     var lowerBound = 0.00;
     var upperBound = 250.00;
 

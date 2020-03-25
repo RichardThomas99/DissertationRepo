@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Data from '../data/data.json';
-import CalcAveragePrice from '../dataManipulationScripts/CalcAveragePrice.js';
 
 class AveragePrice extends Component
 {
