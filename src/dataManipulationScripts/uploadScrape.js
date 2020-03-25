@@ -163,26 +163,17 @@ getSize(desc)
         quantityPrice++;
       }
 
-      /*size Distribution .....................................................*/
+      /*calculating size Distribution .....................................................*/
       if(content.size.length>2){
-        /*console.log("SIZE FOUND = " +content.size);*/
         sizeArray[index] =  parseFloat((content.size).substring(3));
       }
       else{
-        /*console.log("NO SIZE = " + this.getSize(content.desc));*/
         sizeArray[index] = this.getSize(content.desc);
       }
       priceArray[index] = parseInt((content.price).substring(1));
 
 
-    var distribution = Array(2);
-    distribution[0] = new Array(25);
-    distribution[1] = new Array(25);
-
-    distribution = this.getDistribution(sizeArray,priceArray);
-
-
-
+    /*Calculating the average listing time across all listings ...............................*/
     timeTerm = (content.listed).split(" ")[2];
     timeVal = parseInt((content.listed).split(" ")[1]);
 
@@ -206,8 +197,16 @@ getSize(desc)
     totalListed = totalListed + timeVal;
     quantityListed++;
     });
-    var averageListed = totalListed/quantity;
-    var averagePrice = totalPrice/quantity;
+
+    var averageListed = totalListed/quantityListed;
+    var averagePrice = totalPrice/quantityPrice;
+
+    var distribution = Array(2);
+    distribution[0] = new Array(25);
+    distribution[1] = new Array(25);
+
+    distribution = this.getDistribution(sizeArray,priceArray);
+    
     return [averagePrice,minPrice,maxPrice,distribution[0],distribution[1],averageListed];
   }
   writePreambleData()
@@ -219,8 +218,8 @@ getSize(desc)
     const dateRef = trainerRef.child(date);
     const preambleRef = dateRef.child("Preamble");
 
-
     var preambleData = this.calcPreambleData();
+
     dataArray =
     {
       averagePrice: preambleData[0],
@@ -228,6 +227,7 @@ getSize(desc)
       maxPrice: preambleData[2],
       quantPerSize: preambleData[3],
       pricePerSize: preambleData[4],
+      averageListed: preambleData[5],
     };
 
       preambleRef.push(dataArray)
