@@ -1,23 +1,28 @@
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
 
-class DecayRate extends Component
+class ListedTimeOverTime extends Component
 {
 
-  calcDecayRate(item)
+  listedTimeArray(item)
   {
       var snapshot;
       const databaseRef = firebase.database().ref("/");
       const trainerRef = databaseRef.child(item);
       var total =0;
       var quantity=0;
-
-      console.log("databaseRef: " + databaseRef);
-      console.log("trainerRef: " + trainerRef);
+      var count =0;
+      var listedTimeArray = Array(12);
+      var dateArray = Array(12);
+      var date = "";
+      /*console.log("databaseRef: " + databaseRef);
+      console.log("trainerRef: " + trainerRef);*/
 
       trainerRef.on('value', function(snapshot){
         snapshot.forEach(function(childSnapshot){
-
+          date = childSnapshot.key;
+          //Date
+          console.log("date = " + date);
           childSnapshot.forEach(function(childChildSnapshot){
             var childChildKey = childChildSnapshot.key;
 
@@ -32,10 +37,11 @@ class DecayRate extends Component
                   var preambleData = childChildChildChildSnapshot.val();
 
                   //Actual Data
-                  console.log(preambleKey +" = "+ preambleData);
-                  if(preambleKey = "averageListed")
+                  if(preambleKey == "averageListed")
                   {
-                    total = total + parseFloat(preambleData);
+                    listedTimeArray[count] = parseFloat(preambleData);
+                    dateArray[count] = date;
+                    count++;
                   }
 
                 });
@@ -45,12 +51,17 @@ class DecayRate extends Component
           });
         });
       });
-      
-    return 0;
+      console.log("date Array = " + dateArray);
+      console.log("Listed Array = " + listedTimeArray );
+    return listedTimeArray;
   }
   render()
   {
-    var decayRate = this.calcDecayRate("NIKEAIRMAX97SILVERBULLETVAPOURMAX");
+    var listedTimeArray="";
+    console.log("in listedTime !!!!!!!!!!!!!!!!!!  = " + this.props.product);
+
+    listedTimeArray = this.listedTimeArray(this.props.product);
+
     var lowerBound = 0.00;
     var upperBound = 250.00;
 
@@ -62,9 +73,10 @@ class DecayRate extends Component
   return (
     <div>
 
-    <h2>Decay-Rate: {decayRate} </h2>
+    <h2>ListedTime Average OverTime: </h2>
     <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.If the rate is between 0 and 1 the price is falling over time. If the rate is greater than 1 then the price is increasing.</p>
     <p>Settings behind the decay-rate are listed below. </p>
+    {listedTimeArray}
       <ul id="content-list">
           <li>Original Array Used = Untampered</li>
           <li>Lower bounds = £{lowerBound}</li>
@@ -75,4 +87,4 @@ class DecayRate extends Component
  }
 }
 
-export default DecayRate;
+export default ListedTimeOverTime;

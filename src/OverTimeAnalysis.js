@@ -5,6 +5,8 @@ import OverTimeText from './components/OverTimeText';
 import SearchBar from './components/SearchBar';
 import DecayRate from './components/DecayRate';
 import AveragePriceOverTime from './components/AveragePriceOverTime';
+import ListedTimeOverTime from './components/ListedTimeOverTime';
+
 import * as firebase from 'firebase';
 
 class OverTimeAnalysis extends Component
@@ -17,6 +19,7 @@ class OverTimeAnalysis extends Component
   this.state = {
     showMenu: false,
     visible:false,
+    product:NaN,
   };
 
   this.showMenu = this.showMenu.bind(this);
@@ -57,7 +60,12 @@ closeMenu(event) {
                 }}>
                 {array.map((item, i)=>{
                     return(
-                      <button onClick={(e) => {e.preventDefault(); this.getResults(item);}}>
+                      <button onClick={(e) => {e.preventDefault();
+                        this.setState({ product: item , visible:true}, () => {
+                          this.getResults(item);
+                        });
+
+                         }}>
                         {item}
                       </button>
                     );
@@ -67,6 +75,7 @@ closeMenu(event) {
         }
       </div>
     );
+
   }
 
   getCollections()
@@ -103,27 +112,27 @@ closeMenu(event) {
           var childKey = childSnapshot.key;
           var childData = childSnapshot.val();
           //Date
-          console.log("child key = " + childKey);
-          console.log("child Data = "+ childData);
+          //console.log("child key = " + childKey);
+          //console.log("child Data = "+ childData);
 
           childSnapshot.forEach(function(childChildSnapshot){
             var childChildKey = childChildSnapshot.key;
 
             //Data/Preamble
-            console.log("Child child key = " + childChildKey);
+            //console.log("Child child key = " + childChildKey);
 
             childChildSnapshot.forEach(function(childChildChildSnapshot){
               var childChildChildKey = childChildChildSnapshot.key;
 
               //Unique key
-              console.log("Child child child key = " + childChildChildKey);
+              //console.log("Child child child key = " + childChildChildKey);
 
               childChildChildSnapshot.forEach(function(childChildChildChildSnapshot){
                 var childChildChildChildKey = childChildChildChildSnapshot.key;
                 var childChildChildChildData = childChildChildChildSnapshot.val();
 
                 //Actual Data
-                console.log(childChildChildChildKey +" = "+ childChildChildChildData);
+                //console.log(childChildChildChildKey +" = "+ childChildChildChildData);
 
 
               });
@@ -132,20 +141,29 @@ closeMenu(event) {
           });
         });
       });
+
+      console.log("asdfasdfflflflflflflfllfllflfll "+this.state.product);
       return 0;
   }
 
 render()
   {
     var array = this.getCollections();
+    var upload = this.state.visible ? (
+    <ListedTimeOverTime product = {this.state.product}/>
+  ):(<div/>);
+
       return(
         <div>
           <h1>Over-Time Analysis</h1>
           <OverTimeText/>
           <SearchBar/>
           {this.dropdown(array)}
-          <DecayRate/>
+
           <AveragePriceOverTime/>
+
+          {upload }
+
         </div>
       );
   }
