@@ -150,7 +150,10 @@ render()
   {
     var array = this.getCollections();
     var upload = this.state.visible ? (
-    <ListedTimeOverTime product = {this.state.product}/>
+    <div>
+      <ListedTimeOverTime product = {this.state.product}/>
+      <AveragePriceOverTime product = {this.state.product}/>
+    </div>
   ):(<div/>);
 
       return(
@@ -159,9 +162,6 @@ render()
           <OverTimeText/>
           <SearchBar/>
           {this.dropdown(array)}
-
-          <AveragePriceOverTime/>
-
           {upload }
 
         </div>

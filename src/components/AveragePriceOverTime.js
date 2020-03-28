@@ -1,133 +1,129 @@
 import React, {Component} from 'react';
+import * as firebase from 'firebase';
 import {
-AreaChart, Area, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
 class AveragePriceOverTime extends Component
 {
-
-  graph(array,bucketSize,maximumBucket,numOfBuckets)
+  graph(averagePriceArray,dateArray)
   {
-    if(this.props.array!=null)
-    {
-    // console.log("array[0]" + array[0][0]);
-    // console.log("array[1]" + array[1][0]);
-    var dataArray = Array(numOfBuckets);
 
-    for(var i=0;i<numOfBuckets;i++)
+    var dataArray = Array(25);
+
+    for(var i=0;i<25;i++)
     {
       dataArray[i] =
       {
-        "name": (array[i][0]-bucketSize)+ "<" + array[i][0] ,
-        "Quantity": array[i][1],
-        "amt": 2400
+        Date:dateArray[i],
+        AveragePriceArray:averagePriceArray[i],
       }
     }
 
 
     const renderBarChart = (
 
-      <AreaChart width={950} height={250} data={dataArray}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <ReferenceLine y={0} stroke="#000" />
-        <Brush dataKey="name" height={30} stroke="#8884d8" />
-        <Area type="monotone" dataKey="Quantity" stroke="#8884d8" fill="#8884d8" />
-      </AreaChart>
+      <BarChart
+            width={1500}
+            height={350}
+            data={dataArray}
+            margin={{
+              top: 5, right: 30, left: 20, bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="Date" />
+            <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
+            <Tooltip />
+            <Legend verticalAlign="top" wrapperStyle={{ lineHeight: '40px' }} />
+
+            <Bar yAxisId="left" dataKey="AveragePriceArray" fill="#8884d8" />
+          </BarChart>
     );
 
       return renderBarChart;
-    }
+
   }
 
-  printDistribution(c, bucketSize)
+  averagePriceArray(item)
   {
-    if(this.props.array!=null)
-    {
-    //not the most efficient way of printing the arrays
-    return c.map(c=>{
-      return(
-        <p>{"£"+(c[0]-bucketSize) + "-£" +(c[0])+ " - "+ c[1]}</p>
-      )
-    })
+      var snapshot;
+      const databaseRef = firebase.database().ref("/");
+      const trainerRef = databaseRef.child(item);
+      var total =0;
+      var quantity=0;
+      var count =0;
+      var averagePriceArray = Array(12);
+      var dateArray = Array(12);
+      var date = "";
+      /*console.log("databaseRef: " + databaseRef);
+      console.log("trainerRef: " + trainerRef);*/
+
+      trainerRef.on('value', function(snapshot){
+        snapshot.forEach(function(childSnapshot){
+          date = childSnapshot.key;
+          //Date
+          console.log("date = " + date);
+          childSnapshot.forEach(function(childChildSnapshot){
+            var childChildKey = childChildSnapshot.key;
+
+            //Data/Preamble
+            if(childChildKey == "Preamble")
+            {
+              childChildSnapshot.forEach(function(childChildChildSnapshot){
+                var childChildChildKey = childChildChildSnapshot.key;
+
+                childChildChildSnapshot.forEach(function(childChildChildChildSnapshot){
+                  var preambleKey = childChildChildChildSnapshot.key;
+                  var preambleData = childChildChildChildSnapshot.val();
+
+                  //Actual Data
+                  if(preambleKey == "averagePrice")
+                  {
+                    averagePriceArray[count] = parseFloat(preambleData);
+                    dateArray[count] = date;
+                    count++;
+                  }
+
+                });
+              });
+            }
+
+          });
+        });
+      });
+      console.log("date Array = " + dateArray);
+      console.log("Average Price Array = " + averagePriceArray );
+    return [averagePriceArray,dateArray];
   }
-  }
-
-//returned values: c[0] = upperBucketSize, c[1] = count
-  getDistribution(bucketSize,maximumBucket,numOfBuckets)
-  {
-    var priceArray = this.props.array;
-    var upperBucket;
-    var bucket = Array(numOfBuckets);
-    var upperArray = Array(numOfBuckets);
-    var temp;
-    var y=0;
-
-    for(var i=1; i <= numOfBuckets;i++)
-    {
-      upperBucket =i*bucketSize;
-      upperArray[i-1] = upperBucket;
-
-      bucket[i-1]=0;
-      y=0;
-
-      while(priceArray[y+1]!=null)
-      {
-        //temp price float variable.
-        temp = parseFloat(priceArray[y]);
-
-        //Seeing if fits in bucket
-        if((temp < upperBucket)&&(temp>=(upperBucket-bucketSize)))
-        {
-          //Increasing bucket counter if so
-          bucket[i-1]++;
-        }
-        y++;
-      }
-    }
-
-  //VERY USEFUL ALGORITHM FOR PAIRING ARRAYS TOGETHER.
-  var distribution = upperArray.map(function(e, i)
-  {
-    return [e, bucket[i]];
-  });
-
-  return distribution;
-}
-
   render()
   {
-    console.log(this.props);
+    var averagePriceArray="";
+    console.log("in listedTime !!!!!!!!!!!!!!!!!!  = " + this.props.product);
 
-    var bucketSize = 10;
-    var maximumBucket = 200;
-    var numOfBuckets= maximumBucket/bucketSize;
+    averagePriceArray = this.averagePriceArray(this.props.product);
 
-    if(this.props.array != null)
+    var lowerBound = 0.00;
+    var upperBound = 250.00;
+
+    if(!this.props.loading)
     {
-      var distribution = this.getDistribution(bucketSize,maximumBucket,numOfBuckets);
     }
 
-    return (
+
+  return (
     <div>
-        <h3>PriceDistributionGraph Method</h3>
 
-        {this.graph(distribution,bucketSize,maximumBucket,numOfBuckets)}
-
-        <p>Settings behind this price distribution are listed below: </p>
-
-            <p>Original Array Used = Untampered</p>
-            <p> Bucket Size = {bucketSize}</p>
-            <p> Maximum Bucket = {maximumBucket}</p>
-
-
-
-        <h3>Raw Distribution Data: </h3>
-        {this.printDistribution(distribution,bucketSize,numOfBuckets)}
-
+    <h2>Average Price OverTime: </h2>
+    <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.If the rate is between 0 and 1 the price is falling over time. If the rate is greater than 1 then the price is increasing.</p>
+    <p>Settings behind the decay-rate are listed below. </p>
+    {averagePriceArray}
+    {this.graph(averagePriceArray[0],averagePriceArray[1])}
+      <ul id="content-list">
+          <li>Original Array Used = Untampered</li>
+          <li>Lower bounds = £{lowerBound}</li>
+          <li>Upper bounds = £{upperBound}</li>
+      </ul>
     </div>
   );
  }
