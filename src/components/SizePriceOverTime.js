@@ -11,12 +11,6 @@ class SizePriceOverTime extends Component
     var arraySize = listedTimeArray.length;
     var dataArray = Array(arraySize);
       console.log("arrrayyyy  = "+arraySize);
-      /*var i=0;
-      while(isNaN(listedTimeArray[i][0])==false)
-      {
-        console.log("asdfasdfasdfasdffff");
-        i++;
-      }*/
 
     for(var i=0;i<arraySize;i++)
     {
@@ -25,8 +19,31 @@ class SizePriceOverTime extends Component
       dataArray[i] =
       {
         Date:dateArray[i],
-        ListedAverage:listedTimeArray[i],
-
+        sa0:listedTimeArray[i][0],
+        sa1:listedTimeArray[i][1],
+        sa2:listedTimeArray[i][2],
+        sa3:listedTimeArray[i][3],
+        sa4:listedTimeArray[i][4],
+        sa5:listedTimeArray[i][5],
+        sa6:listedTimeArray[i][6],
+        sa7:listedTimeArray[i][7],
+        sa8:listedTimeArray[i][8],
+        sa9:listedTimeArray[i][9],
+        sa10:listedTimeArray[i][10],
+        sa11:listedTimeArray[i][11],
+        sa12:listedTimeArray[i][12],
+        sa13:listedTimeArray[i][13],
+        sa14:listedTimeArray[i][14],
+        sa15:listedTimeArray[i][15],
+        sa16:listedTimeArray[i][16],
+        sa17:listedTimeArray[i][17],
+        sa18:listedTimeArray[i][18],
+        sa19:listedTimeArray[i][19],
+        sa20:listedTimeArray[i][20],
+        sa21:listedTimeArray[i][21],
+        sa22:listedTimeArray[i][22],
+        sa23:listedTimeArray[i][23],
+        sa24:listedTimeArray[i][24],
       }
     }
 
@@ -47,7 +64,31 @@ class SizePriceOverTime extends Component
             <Tooltip />
             <Legend verticalAlign="top" wrapperStyle={{ lineHeight: '40px' }} />
 
-            <Bar yAxisId="left" dataKey="ListedAverage" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa0" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa1" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa2" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa3" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa4" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa5" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa6" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa7" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa8" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa9" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa10" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa11" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa12" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa13" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa14" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa15" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa16" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa17" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa18" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa19" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa20" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa21" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa22" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa23" fill="#8884d8" />
+            <Bar yAxisId="left" dataKey="sa24" fill="#8884d8" />
           </BarChart>
     );
 
@@ -63,8 +104,8 @@ class SizePriceOverTime extends Component
       var total =0;
       var quantity=0;
       var count =0;
-      var listedTimeArray = Array(12);
-      var dateArray = Array(12);
+      var listedTimeArray = Array(this.props.count);
+      var dateArray = Array(this.props.count);
       var date = "";
       /*console.log("databaseRef: " + databaseRef);
       console.log("trainerRef: " + trainerRef);*/
