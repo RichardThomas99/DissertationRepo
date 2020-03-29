@@ -64,31 +64,31 @@ class SizePriceOverTime extends Component
             <Tooltip />
             <Legend verticalAlign="top" wrapperStyle={{ lineHeight: '40px' }} />
 
-            <Bar yAxisId="left" dataKey="sa0" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa1" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa2" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa3" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa4" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa5" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa6" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa7" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa8" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa9" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa10" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa11" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa12" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa13" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa14" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa15" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa16" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa17" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa18" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa19" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa20" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa21" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa22" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa23" fill="#8884d8" />
-            <Bar yAxisId="left" dataKey="sa24" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 1.5" dataKey="sa0" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 2" dataKey="sa1" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 2.5" dataKey="sa2" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 3" dataKey="sa3" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 3.5" dataKey="sa4" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 4" dataKey="sa5" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 4.5" dataKey="sa6" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 5" dataKey="sa7" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 5.5" dataKey="sa8" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 6" dataKey="sa9" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 6.5" dataKey="sa10" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 7" dataKey="sa11" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 7.5" dataKey="sa12" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 8" dataKey="sa13" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 8.5" dataKey="sa14" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 9" dataKey="sa15" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 9.5" dataKey="sa16" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 10" dataKey="sa17" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 10.5" dataKey="sa18" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 11" dataKey="sa19" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 11.5" dataKey="sa20" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 12" dataKey="sa21" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 12.5" dataKey="sa22" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 13" dataKey="sa23" fill="#8884d8" />
+            <Bar yAxisId="left" name = "Size 13.5" dataKey="sa24" fill="#8884d8" />
           </BarChart>
     );
 
