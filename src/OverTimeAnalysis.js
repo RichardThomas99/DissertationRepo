@@ -158,7 +158,7 @@ render()
       <ListedTimeOverTime count = {this.state.count} product = {this.state.product}/>
       <AveragePriceOverTime count = {this.state.count} product = {this.state.product}/>
       <SizePriceOverTime count = {this.state.count} product = {this.state.product}/>
-
+      <DecayRate/>
     </div>
   ):(<div/>);
 

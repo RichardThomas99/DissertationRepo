@@ -3,7 +3,36 @@ import * as firebase from 'firebase';
 
 class DecayRate extends Component
 {
+  averageOfArray(array)
+  {
+    var total=0;
+    var i=0;
 
+    for(i=0; i<array.length;i++)
+    {
+      total = total + array[i];
+    }
+    return(total/i);
+  }
+  leastSquares(xArray,yArray)
+  {
+    var xAverage = this.averageOfArray(xArray);
+    var yAverage = this.averageOfArray(yArray);
+    var xInter;
+    var yInter;
+    var sum1 =0;
+    var sum2=0;
+
+    for(var i=0; i<xArray.length;i++)
+    {
+      xInter = xArray[i]-xAverage;
+      yInter =yArray[i]-yAverage;
+      sum1 = sum1 + (xInter*yInter);
+      sum2 = sum2 + (xInter*xInter);
+
+    }
+    return (sum1/sum2);
+  }
   calcDecayRate(item)
   {
       var snapshot;
@@ -45,12 +74,16 @@ class DecayRate extends Component
           });
         });
       });
-      
+
     return 0;
   }
   render()
   {
-    var decayRate = this.calcDecayRate("NIKEAIRMAX97SILVERBULLETVAPOURMAX");
+    /*this.calcDecayRate("NIKEAIRMAX97SILVERBULLETVAPOURMAX");*/
+
+    var x = [8,2,11,6,5,4,12,9,6,1];
+    var y = [3,10,3,6,8,12,1,4,9,14];
+    var decayRate = this.leastSquares(x,y);
     var lowerBound = 0.00;
     var upperBound = 250.00;
 
