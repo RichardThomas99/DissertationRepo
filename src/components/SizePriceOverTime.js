@@ -8,15 +8,25 @@ class SizePriceOverTime extends Component
 {
   graph(listedTimeArray,dateArray)
   {
+    var arraySize = listedTimeArray.length;
+    var dataArray = Array(arraySize);
+      console.log("arrrayyyy  = "+arraySize);
+      /*var i=0;
+      while(isNaN(listedTimeArray[i][0])==false)
+      {
+        console.log("asdfasdfasdfasdffff");
+        i++;
+      }*/
 
-    var dataArray = Array(25);
-
-    for(var i=0;i<25;i++)
+    for(var i=0;i<arraySize;i++)
     {
+
+
       dataArray[i] =
       {
         Date:dateArray[i],
         ListedAverage:listedTimeArray[i],
+
       }
     }
 
@@ -81,7 +91,7 @@ class SizePriceOverTime extends Component
                   if(preambleKey == "pricePerSize")
                   {
                     listedTimeArray[count] = preambleData;
-                    console.log("pricePersize" = preambleData);
+                    console.log("pricePersize = " + preambleData);
                     dateArray[count] = date;
                     count++;
                   }

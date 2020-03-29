@@ -6,6 +6,7 @@ import SearchBar from './components/SearchBar';
 import DecayRate from './components/DecayRate';
 import AveragePriceOverTime from './components/AveragePriceOverTime';
 import ListedTimeOverTime from './components/ListedTimeOverTime';
+import SizePriceOverTime from './components/SizePriceOverTime';
 
 import * as firebase from 'firebase';
 
@@ -20,6 +21,7 @@ class OverTimeAnalysis extends Component
     showMenu: false,
     visible:false,
     product:NaN,
+    count:0,
   };
 
   this.showMenu = this.showMenu.bind(this);
@@ -46,6 +48,7 @@ closeMenu(event) {
 }
   dropdown(array)
   {
+    var count=0;
     return(
       <div>
         <button onClick={this.showMenu}>
@@ -61,8 +64,9 @@ closeMenu(event) {
                 {array.map((item, i)=>{
                     return(
                       <button onClick={(e) => {e.preventDefault();
-                        this.setState({ product: item , visible:true}, () => {
-                          this.getResults(item);
+                       count = this.getResults(item);
+                        this.setState({ product: item ,count: count, visible:true}, () => {
+
                         });
 
                          }}>
@@ -100,6 +104,7 @@ closeMenu(event) {
   getResults(item)
   {
       var snapshot;
+      var count =0;
       const databaseRef = firebase.database().ref("/");
       const trainerRef = databaseRef.child(item);
 
@@ -112,9 +117,9 @@ closeMenu(event) {
           var childKey = childSnapshot.key;
           var childData = childSnapshot.val();
           //Date
-          //console.log("child key = " + childKey);
-          //console.log("child Data = "+ childData);
-
+          console.log("child key = " + childKey);
+          console.log("child Data = "+ childData);
+          count++;
           childSnapshot.forEach(function(childChildSnapshot){
             var childChildKey = childChildSnapshot.key;
 
@@ -142,8 +147,7 @@ closeMenu(event) {
         });
       });
 
-      console.log("asdfasdfflflflflflflfllfllflfll "+this.state.product);
-      return 0;
+      return count;
   }
 
 render()
@@ -151,8 +155,10 @@ render()
     var array = this.getCollections();
     var upload = this.state.visible ? (
     <div>
-      <ListedTimeOverTime product = {this.state.product}/>
-      <AveragePriceOverTime product = {this.state.product}/>
+      <ListedTimeOverTime count = {this.state.count} product = {this.state.product}/>
+      <AveragePriceOverTime count = {this.state.count} product = {this.state.product}/>
+      <SizePriceOverTime count = {this.state.count} product = {this.state.product}/>
+
     </div>
   ):(<div/>);
 

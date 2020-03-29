@@ -53,8 +53,8 @@ class ListedTimeOverTime extends Component
       var total =0;
       var quantity=0;
       var count =0;
-      var listedTimeArray = Array(12);
-      var dateArray = Array(12);
+      var listedTimeArray = Array(this.props.count);
+      var dateArray = Array(this.props.count);
       var date = "";
       /*console.log("databaseRef: " + databaseRef);
       console.log("trainerRef: " + trainerRef);*/
