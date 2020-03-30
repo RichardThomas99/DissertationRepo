@@ -17,7 +17,7 @@ class uploadScrape extends Component
   currentDate()
   {
     var today = new Date();
-    var date = today.getFullYear()+'_'+(today.getMonth()+1)+'_'+today.getDate();
+    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
     console.log("DATE = " + date);
     return date;
   }
@@ -206,7 +206,7 @@ getSize(desc)
     distribution[1] = new Array(25);
 
     distribution = this.getDistribution(sizeArray,priceArray);
-    
+
     return [averagePrice,minPrice,maxPrice,distribution[0],distribution[1],averageListed];
   }
   writePreambleData()
