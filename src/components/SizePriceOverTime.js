@@ -9,9 +9,10 @@ class SizePriceOverTime extends Component
   graph(sizePriceArray,dateArray)
   {
     var arraySize = sizePriceArray.length;
+    console.log("AAAAAAA = "+arraySize);
     var dataArray = Array(arraySize);
 
-    for(var i=0;i<arraySize;i++)
+    for(var i=0;i<arraySize-1;i++)
     {
       dataArray[i] =
       {
@@ -43,7 +44,7 @@ class SizePriceOverTime extends Component
         sa24:sizePriceArray[i][24],
       }
     }
-
+/*
 
     const renderBarChart = (
 
@@ -90,7 +91,7 @@ class SizePriceOverTime extends Component
     );
 
       return renderBarChart;
-
+*/
   }
 
   sizePriceArray(item)
@@ -148,7 +149,8 @@ class SizePriceOverTime extends Component
   render()
   {
     var sizePriceArray = this.sizePriceArray(this.props.product);
-
+    console.log("size array [0] = " + sizePriceArray[0][2]);
+    console.log("size array [1] = " + sizePriceArray[1][2]);
     var lowerBound = 0.00;
     var upperBound = 250.00;
 

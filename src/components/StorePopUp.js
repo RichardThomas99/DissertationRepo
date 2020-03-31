@@ -102,7 +102,10 @@ closeMenu(event) {
   {
     var array = this.getCollections();
     const upload = this.state.visible ? (
+      <div>
+      {console.log("UPLOADSCRAPE CALL StorePopUp")}
       <UploadScrape term = {this.state.saveLocation}/>
+      </div>
     ):(<div/>);
 
   return (
@@ -114,7 +117,7 @@ closeMenu(event) {
 
     {this.dropdown(array)}
     <p>You are looking to put {this.state.currentJSON} in the location named: {this.state.saveLocation}</p>
-    <button onClick={() => {this.setState({visible: !this.state.visible});}}>
+    <button onClick={() => {this.setState({visible: true});}}>
       CONFIRM SAVE
     </button>
     {upload}

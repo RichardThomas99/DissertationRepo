@@ -17,11 +17,11 @@ class uploadScrape extends Component
   currentDate()
   {
     var today = new Date();
-    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+    var date = today.getFullYear()+'_'+(today.getMonth()+1)+'_'+today.getDate();
     console.log("DATE = " + date);
     return date;
   }
-  checkIfDateIsWritten(currentDate)
+  checkIfDateIsWritten()
   {
       var date = this.state.date;
       var snapshot;
@@ -209,11 +209,11 @@ getSize(desc)
 
     return [averagePrice,minPrice,maxPrice,distribution[0],distribution[1],averageListed];
   }
-  writePreambleData()
+  writePreambleData(product)
   {
+    console.log("Preamble data function ");
     var dataArray = [];
     var date = this.state.date;
-    var product = this.state.product;
     const trainerRef = firebase.database().ref().child(product);
     const dateRef = trainerRef.child(date);
     const preambleRef = dateRef.child("Preamble");
@@ -234,12 +234,11 @@ getSize(desc)
 
       return 0;
   }
-writeData()
+writeData(product)
 {
   var dataArray = [];
   var date = this.state.date;
-  var product = this.state.product;
-  console.log("asdfasggggggdf product "+product);
+  console.log("WRITE DATA FUNCTION product "+product);
   const trainerRef = firebase.database().ref().child(product);
   const dateRef = trainerRef.child(date);
   const dataRef = dateRef.child("Data");
@@ -283,7 +282,7 @@ writeToFirebase()
   console.log("product = " + productTitle);
   if((productTitle.length<4)||(productTitle == "[New Save Location]") ||(productTitle =="[Not Set]"))
   {
-    console.log("product = " + productTitle);
+    console.log("WRITE TO FIREBASE");
     productTitle = this.getProduct();
   }
   else
@@ -294,18 +293,16 @@ writeToFirebase()
 
   if(this.checkIfDateIsWritten())
   {
-      this.setState({product: productTitle}, function () {
-    console.log("product state = "+this.state.product);
-    this.writePreambleData();
-    this.writeData();
-});
-      console.log("asdfasdf state product = " + this.state.product);
-
+    console.log("check if date is written");
+      this.writePreambleData(productTitle);
+      this.writeData(productTitle);
   }
 }
 
 render()
 {
+  console.log("uploadScrape class");
+
   this.writeToFirebase();
 
 

@@ -5,14 +5,26 @@ class DecayRate extends Component
 {
   convertDatesToIndex(dateArray)
   {
+
+    var dateIndex = Array(dateArray.length);
+
+    //*****************************************************Not sure on date array.length -1
     for(var i=0;i<dateArray.length;i++)
     {
-        var differenceInTime = dateArray[0].getTime() - dateArray[0].getTime();
-        var differenceInDays = differenceInTime / (1000 * 3600 * 24);
+        dateArray[i] = dateArray[i].replace(/_/g, "/");
+        console.log(dateArray[i]);
+
+        var date1 = new Date(dateArray[i]);
+        var date2 = new Date(dateArray[0]);
+        console.log(date2.getTime() + " == array length");
+
+        var differenceInTime = date1.getTime() - date2.getTime();
+        var differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24));
         console.log("date = "+differenceInDays);
+        dateIndex[i] = differenceInDays;
     }
-
-
+    console.log("Date Index = "+ dateIndex)
+    return dateIndex;
   }
   averageOfArray(array)
   {
@@ -28,6 +40,8 @@ class DecayRate extends Component
 
   leastSquares(xArray,yArray)
   {
+    console.log(xArray +"    -     " + yArray);
+
     var xAverage = this.averageOfArray(xArray);
     var yAverage = this.averageOfArray(yArray);
     var xInter;
@@ -54,6 +68,7 @@ class DecayRate extends Component
       var quantity = 0;
       var date;
       var count = 0;
+
       var priceArray = Array(this.props.count);
       var dateArray = Array(this.props.count);
 
@@ -64,6 +79,7 @@ class DecayRate extends Component
         snapshot.forEach(function(childSnapshot){
 
           dateArray[count] = childSnapshot.key;
+
           //Date
           console.log("date = " + date);
 
@@ -83,7 +99,7 @@ class DecayRate extends Component
                   //Actual Data
                   console.log(preambleKey +" = "+ preambleData);
 
-                  if(preambleKey = "averagePrice")
+                  if(preambleKey == "averagePrice")
                   {
                     priceArray[count] = preambleData;
                     count++;
@@ -101,21 +117,14 @@ class DecayRate extends Component
   render()
   {
     var array = this.calcDecayRate("NIKEAIRMAX97SILVERBULLETVAPOURMAX");
-    var today = new Date();
-    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
-    var dater = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate());
-    var date1 = new Date(date);
-    var date2 = new Date(dater);
-    console.log(date2.getTime() + " == array length");
 
-    var differenceInTime = date2.getTime() - date1.getTime();
-    var differenceInDays = differenceInTime / (1000 * 3600 * 24);
-    console.log("date = "+differenceInDays);
-    /*this.convertDatesToIndex(array[1]);*/
+    console.log("xlength  = " + array[1]);
+    console.log("ylength  = " + array[0]);
 
-    var x = array[1];
+    var x = this.convertDatesToIndex(array[1]);
     var y = array[0];
-    /*var decayRate = this.leastSquares(x,y);*/
+
+    var decayRate = this.leastSquares(x,y);
     var lowerBound = 0.00;
     var upperBound = 250.00;
 
@@ -127,7 +136,7 @@ class DecayRate extends Component
   return (
     <div>
 
-    <h2>Decay-Rate:  </h2>
+    <h2>Decay-Rate: {decayRate} </h2>
     <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.If the rate is between 0 and 1 the price is falling over time. If the rate is greater than 1 then the price is increasing.</p>
     <p>Settings behind the decay-rate are listed below. </p>
       <ul id="content-list">
