@@ -7,20 +7,24 @@ class DecayRate extends Component
   {
 
     var dateIndex = Array(dateArray.length);
+    var date1;
+    var date2;
+    var differenceInTime;
+    var differenceInDays
 
-    //*****************************************************Not sure on date array.length -1
     for(var i=0;i<dateArray.length;i++)
     {
         dateArray[i] = dateArray[i].replace(/_/g, "/");
         console.log(dateArray[i]);
 
-        var date1 = new Date(dateArray[i]);
-        var date2 = new Date(dateArray[0]);
-        console.log(date2.getTime() + " == array length");
+        date1 = new Date(dateArray[i]);
+        if(i==0)
+        {
+          date2 = new Date(dateArray[0]);
+        }
 
-        var differenceInTime = date1.getTime() - date2.getTime();
-        var differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24));
-        console.log("date = "+differenceInDays);
+        differenceInTime = date1.getTime() - date2.getTime();
+        differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24));
         dateIndex[i] = differenceInDays;
     }
     console.log("Date Index = "+ dateIndex)
@@ -137,13 +141,7 @@ class DecayRate extends Component
     <div>
 
     <h2>Decay-Rate: {decayRate} </h2>
-    <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.If the rate is between 0 and 1 the price is falling over time. If the rate is greater than 1 then the price is increasing.</p>
-    <p>Settings behind the decay-rate are listed below. </p>
-      <ul id="content-list">
-          <li>Original Array Used = Untampered</li>
-          <li>Lower bounds = £{lowerBound}</li>
-          <li>Upper bounds = £{upperBound}</li>
-      </ul>
+    <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.</p>
     </div>
   );
  }
