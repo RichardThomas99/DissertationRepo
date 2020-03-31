@@ -19,6 +19,9 @@ printAllData()
     <p>{content.size}</p>
     <p>{((content.location).split(','))[1]}</p>
     <p>{content.listed}</p>
+    <p>{content.followers}</p>
+    <p>{content.stars}</p>
+    <p>{content.reviews}</p>
     </div>
   })
 }
