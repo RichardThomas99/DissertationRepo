@@ -113,7 +113,10 @@ calcScore()
 }
 printAllData(scores)
 {
+
   return Data.map((content, index)=>{
+    var url =content.url;
+
     return<div>
     <h1>{index}</h1>
     <h1>{scores[index]}</h1>
@@ -126,6 +129,7 @@ printAllData(scores)
     <p>{content.followers}</p>
     <p>{content.stars}</p>
     <p>{content.reviews}</p>
+    <a href={content.url}>{content.url}</a>
     </div>
   })
 }

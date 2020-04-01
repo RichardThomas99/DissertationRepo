@@ -22,6 +22,7 @@ printAllData()
     <p>{content.followers}</p>
     <p>{content.stars}</p>
     <p>{content.reviews}</p>
+    <p>{content.url}</p>
     </div>
   })
 }
