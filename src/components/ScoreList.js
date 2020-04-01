@@ -75,6 +75,36 @@ calcScore()
     //DOUBLE CHECK THE 500 VALUE, IF GOODS ARE GREATER THAN 500 WE HAVE A PROBLEM
     score = score + ((500-price)/25)
 
+
+
+    //SELLER RATING
+    var stars = content.stars.split("<");
+    var starCount=0;
+
+    for(var i=0;i<stars.length;i++)
+    {
+      if(stars[i]=="Full Star")
+      {
+        starCount++;
+      }
+      if(stars[i]=="Half Star")
+      {
+        starCount = starCount +0.5;
+      }
+    }
+
+    if(content.reviews<10)
+    {
+      score = score + starCount*0.5;
+    }
+    else if(content.reviews < 50)
+    {
+      score = score +starCount*1;
+    }
+    else {
+      score = score + starCount*1.5;
+    }
+
     console.log("score: " + score)
     scores[index] = score;
 
@@ -93,7 +123,9 @@ printAllData(scores)
     <p>{content.size}</p>
     <p>{((content.location).split(','))[1]}</p>
     <p>{content.listed}</p>
-    <p>{content.url}</p>
+    <p>{content.followers}</p>
+    <p>{content.stars}</p>
+    <p>{content.reviews}</p>
     </div>
   })
 }
