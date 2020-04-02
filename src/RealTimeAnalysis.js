@@ -11,9 +11,46 @@ import ListedTimeDistribution from './components/ListedTimeDistribution.js'
 
 class RealTimeAnalysis extends Component
 {
+  test()
+  {
+    var currency ="";
+    var price=0.0;
+    var priceText="";
 
+    Data.map(function(content,index)
+    {
+      priceText = content.price;
+
+      currency = priceText.substring(0,1);
+      price = parseFloat(priceText.substring(1));
+
+      if(priceText.length>9)
+      {
+        price= parseFloat(priceText.split(currency)[2]);
+      }
+      console.log(currency)
+      if(currency == "$")
+      {
+        console.log("CURRENCY = " + currency);
+        console.log(price+" , "+parseFloat(price*0.8));
+        content.price = "£"+parseFloat(price*0.8);
+      }
+      else if (currency =="€") {
+        console.log("CURRENCY 2= " + currency);
+        content.price = "£"+parseFloat(price*0.88);
+      }
+      else {
+        console.log("CURRENCY3 = " + currency);
+        content.price = currency+ price;
+      }
+
+      console.log("price = "+ content.price )
+    });
+
+  }
 render()
   {
+    this.test();
       return(
         <div>
           <h1>RealTimeAnalysis</h1>

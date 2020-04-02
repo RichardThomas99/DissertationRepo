@@ -11,10 +11,6 @@ class AveragePrice extends Component
 
     Data.map(function(content,index)
     {
-      if((content.price).length>7)
-      {
-
-      }
 
       price = parseInt((content.price).substring(1));
 
