@@ -7,7 +7,36 @@ import ScoreList from './components/ScoreList';
 import Product from './components/productInJson'
 class TopListings extends Component
 {
+sanitiseData()
+{
+  var currency ="";
+  var price=0.0;
+  var priceText="";
 
+  Data.map(function(content,index)
+  {
+    priceText = content.price;
+
+    currency = priceText.substring(0,1);
+    price = parseFloat(priceText.substring(1));
+
+    if(priceText.length>9)
+    {
+      price= parseFloat(priceText.split(currency)[2]);
+    }
+    if(currency == "$")
+    {
+      console.log(price+" , "+parseFloat(price*0.8));
+      content.price = "£"+parseFloat(price*0.8);
+    }
+    else if (currency =="€") {
+      content.price = "£"+parseFloat(price*0.88);
+    }
+    else {
+      content.price = currency+ price;
+    }
+  });
+}
 printAllData()
 {
   return Data.map((content, index)=>{
@@ -46,7 +75,7 @@ calcAvePrice()
 
 render()
   {
-
+    this.sanitiseData();
       return(
 
         <div>
