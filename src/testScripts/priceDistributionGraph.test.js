@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Nav from '../components/ScoreText';
+import PriceDistributionGraph from '../components/PriceDistributionGraph';
+import renderer from 'react-test-renderer'
 
-it("ScoreText Renders",()=>{
-  const div = document.createElement("div");
-  ReactDOM.render(<div></div>,div)
-})
+it("PriceDistributionGraph Render",() => {
+  const priceDistributionGraph = renderer.create(
+    <PriceDistributionGraph/>
+  ).toJSON();
+  expect(PriceDistributionGraph).toMatchSnapshot();
+});

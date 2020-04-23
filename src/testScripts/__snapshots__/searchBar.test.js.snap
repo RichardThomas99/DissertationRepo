@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar Render 1`] = `
+<div
+  class="searchDiv"
+>
+  <form>
+    <label>
+      <input
+        id="textSearch"
+        name="product"
+        placeholder="Search a Product..."
+        type="text"
+      />
+    </label>
+    <button
+      onClick={[Function]}
+    >
+       Submit Search 
+    </button>
+  </form>
+</div>
+`;

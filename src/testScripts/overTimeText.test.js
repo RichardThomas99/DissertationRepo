@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Nav from '../components/OverTimeText';
+import OverTimeText from '../components/OverTimeText';
 
-it("ScoreText Renders",()=>{
-  const div = document.createElement("div");
-  ReactDOM.render(<div></div>,div)
-})
+import renderer from 'react-test-renderer'
+
+it("OverTimeText Render",() => {
+  const overTimeTextComponent = renderer.create(
+    <OverTimeText/>
+  ).toJSON();
+  expect(overTimeTextComponent).toMatchSnapshot();
+});

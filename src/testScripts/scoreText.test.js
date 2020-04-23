@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Nav from '../components/ScoreText';
+import ScoreText from '../components/ScoreText';
+import renderer from 'react-test-renderer'
 
-it("ScoreText Renders",()=>{
-  const div = document.createElement("div");
-  ReactDOM.render(<div></div>,div)
-})
+it("ScoreText Render",() => {
+  const scoreTextComponent = renderer.create(
+    <ScoreText/>
+  ).toJSON();
+  expect(scoreTextComponent).toMatchSnapshot();
+});
