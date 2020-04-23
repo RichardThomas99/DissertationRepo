@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`productInJsonComponent Render 1`] = `
+<div>
+  Nike Air Max 97 Silver Bullet OG Colourway.
+</div>
+`;
