@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import StorePopUp from '../components/StorePopUp';
+import Settings from '../Settings';
 import renderer from 'react-test-renderer'
 import * as firebase from 'firebase';
 
@@ -14,10 +14,9 @@ var firebaseConfig = {
    appId: "1:363779589831:web:118afb9558e84d35"
  };
 firebase.initializeApp(firebaseConfig);
-
-it("StorePopUp Render",() => {
-  const storePopUpComponent = renderer.create(
-    <StorePopUp/>
+it("Settings Render",() => {
+  const settingsComponent = renderer.create(
+    <Settings/>
   ).toJSON();
-  expect(storePopUpComponent).toMatchSnapshot();
+  expect(settingsComponent).toMatchSnapshot();
 });

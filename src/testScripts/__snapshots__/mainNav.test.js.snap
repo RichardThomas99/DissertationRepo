@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main Nav Render 1`] = `
+<nav
+  className="navMain"
+  data-testid="navigation"
+>
+  <ul
+    className="mainNav-links"
+  >
+    <a
+      href="/TopListings"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+    >
+      <li>
+        Top Listings
+      </li>
+    </a>
+    <a
+      href="/RealTimeAnalysis"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+    >
+      <li>
+        Real-Time Analysis
+      </li>
+    </a>
+    <a
+      href="/OverTimeAnalysis"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+    >
+      <li>
+        Over-Time Analysis
+      </li>
+    </a>
+  </ul>
+</nav>
+`;

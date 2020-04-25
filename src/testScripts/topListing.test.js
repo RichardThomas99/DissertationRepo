@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import StorePopUp from '../components/StorePopUp';
+import TopListings from '../TopListings';
 import renderer from 'react-test-renderer'
 import * as firebase from 'firebase';
 
@@ -15,9 +15,9 @@ var firebaseConfig = {
  };
 firebase.initializeApp(firebaseConfig);
 
-it("StorePopUp Render",() => {
-  const storePopUpComponent = renderer.create(
-    <StorePopUp/>
+it("TopListings Render",() => {
+  const topListingsComponent = renderer.create(
+    <TopListings/>
   ).toJSON();
-  expect(storePopUpComponent).toMatchSnapshot();
+  expect(topListingsComponent).toMatchSnapshot();
 });

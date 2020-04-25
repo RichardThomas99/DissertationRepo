@@ -5,10 +5,6 @@ import ConvertCurrency from '../dataManipulationScripts/convertCurrency.js';
 class TopListings extends Component
 {
 
-descScore(desc)
-{
-  console.log("desc: "+ desc)
-}
 calcScore()
 {
   var scores =[];
@@ -17,6 +13,7 @@ calcScore()
   var listed =[] ;
   var timeListed = "";
   var size=0.0;
+
   Data.map(function(content,index)
   {
     score=50;
@@ -28,10 +25,6 @@ calcScore()
     // }
 
 
-    if(content.price.substring(0,1)!=="£")
-    {
-      console.log("The currency " + content.price.substring(0,1));
-    }
 
     //Time Listed Component
     listed = content.listed;
@@ -70,7 +63,7 @@ calcScore()
 
     //Price Components
     var price = parseFloat(content.price.substring(1));
-    console.log(price);
+
     //The lower the price the higher the score addition
     //DOUBLE CHECK THE 500 VALUE, IF GOODS ARE GREATER THAN 500 WE HAVE A PROBLEM
     score = score + ((500-price)/25)
@@ -105,7 +98,6 @@ calcScore()
       score = score + starCount*1.5;
     }
 
-    console.log("score: " + score)
     scores[index] = score;
 
   })
@@ -117,7 +109,7 @@ printAllData(scores)
   return Data.map((content, index)=>{
     var url =content.url;
 
-    return<div>
+    return(<div>
     <h1>{index}</h1>
     <h1>{scores[index]}</h1>
     <h3>{content.seller}</h3>
@@ -130,7 +122,7 @@ printAllData(scores)
     <p>{content.stars}</p>
     <p>{content.reviews}</p>
     <a href={content.url}>{content.url}</a>
-    </div>
+    </div>);
   })
 }
 calcAvePrice()
@@ -146,8 +138,6 @@ calcAvePrice()
     quantity = index+1;
   });
 
-  console.log("index - "+ quantity);
-  console.log("average price - "+ (total/quantity))
   return "Total Market Value is : £" + total;
 }
 

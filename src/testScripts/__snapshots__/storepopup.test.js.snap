@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StorePopUp Render 1`] = `
+<div>
+  <h3>
+    Current JSON contains = 
+    <div>
+      Nike Air Max 97 Silver Bullet OG Colourway.
+    </div>
+  </h3>
+  <p>
+    Choose the save location of the new JSON from the dropdown below 
+  </p>
+  <div>
+    <button
+      onClick={[Function]}
+    >
+      Possible Save Locations
+    </button>
+  </div>
+  <p>
+    You are looking to put 
+    <div>
+      Nike Air Max 97 Silver Bullet OG Colourway.
+    </div>
+     in the location named: 
+    [Not Set]
+  </p>
+  <button
+    onClick={[Function]}
+  >
+    CONFIRM SAVE
+  </button>
+  <div />
+</div>
+`;

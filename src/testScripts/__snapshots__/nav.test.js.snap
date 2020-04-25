@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`navComponent Render 1`] = `
+<nav
+  data-testid="navigation"
+>
+  <h1>
+    RESELLER COMPANION APP
+  </h1>
+  <ul
+    className="nav-links"
+  >
+    <a
+      href="/Settings"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "black",
+        }
+      }
+    >
+      <li>
+        Settings
+      </li>
+    </a>
+  </ul>
+</nav>
+`;
