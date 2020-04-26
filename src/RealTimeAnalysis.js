@@ -9,6 +9,24 @@ import Data from './data/data.json';
 import Product from './components/productInJson'
 import ListedTimeDistribution from './components/ListedTimeDistribution.js'
 
+
+/**
+ * A ReactJS class which renders all the components relating to the real-time
+ * analysis of the product listing
+ * @example
+ * return (
+ *         <h1>RealTimeAnalysis</h1>
+ *         <SearchBar/>
+ *         <Product/>
+ *         <AveragePrice/>
+ *         <h2>*****************************************************************************************</h2>
+ *         <PriceDistributionGraph/>
+ *         <h2>*****************************************************************************************</h2>
+ *         <SizeAnalysis/>
+ *         <h2>*****************************************************************************************</h2>
+ *         <ListedTimeDistribution/>
+ * )
+ */
 class RealTimeAnalysis extends Component
 {
   sanitiseData()

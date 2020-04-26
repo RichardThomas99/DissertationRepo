@@ -5,6 +5,7 @@ import Data from './data/data.json';
 import ConvertCurrency from './dataManipulationScripts/convertCurrency.js';
 import ScoreList from './components/ScoreList';
 import Product from './components/productInJson'
+
 class TopListings extends Component
 {
 sanitiseData()
