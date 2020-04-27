@@ -6,6 +6,22 @@ import ConvertCurrency from './dataManipulationScripts/convertCurrency.js';
 import ScoreList from './components/ScoreList';
 import Product from './components/productInJson'
 
+/**
+ * A ReactJS class which renders all the components relating to the top listings
+ * analysis of the products from the scrape.
+ * @example
+ * return (
+ *      <div>
+ *        <h1>TopListings</h1>
+ *        <ScoreText/>
+ *        <SearchBar/>
+ *
+ *        <Product/>
+ *        <ConvertCurrency/>
+ *        <ScoreList/>
+ *      </div>
+ * )
+ */
 class TopListings extends Component
 {
 sanitiseData()
