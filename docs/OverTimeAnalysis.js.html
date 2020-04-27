@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: OverTimeAnalysis.js</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                     
+                        <h1 class="navbar-item">My React components</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="OverTimeAnalysis.html">OverTimeAnalysis</a></li><li><a href="RealTimeAnalysis.html">RealTimeAnalysis</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Source</p>
+                        <h1>OverTimeAnalysis.js</h1>
+                    </header>
+                    
+                    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {Component} from 'react';
+
+//Components
+import OverTimeText from './components/OverTimeText';
+import SearchBar from './components/SearchBar';
+import DecayRate from './components/DecayRate';
+import AveragePriceOverTime from './components/AveragePriceOverTime';
+import ListedTimeOverTime from './components/ListedTimeOverTime';
+import SizePriceOverTime from './components/SizePriceOverTime';
+
+import * as firebase from 'firebase';
+
+/**
+ * A ReactJS class which renders all the components relating to the over-time
+ * analysis of the product listing
+ *
+ * @example
+ *   return (
+ *    &lt;div>
+ *      &lt;h1>Over-Time Analysis&lt;/h1>
+ *      &lt;OverTimeText/>
+ *      &lt;SearchBar/>
+ *      {this.dropdown(array)}
+ *      &lt;div>
+ *        &lt;ListedTimeOverTime count = {this.state.count} product = {this.state.product}/>
+ *        &lt;AveragePriceOverTime count = {this.state.count} product = {this.state.product}/>
+ *        &lt;SizePriceOverTime count = {this.state.count} product = {this.state.product}/>
+ *        &lt;DecayRate/>
+ *      &lt;/div>
+      &lt;/div>
+ * )
+ */
+class OverTimeAnalysis extends Component
+{
+  constructor() {
+  super();
+
+//THIS NEEDS MAJOR REFACTORING TO RE ORDER THESE METHODS TO A MOST OPTIMAL SOLUTION...
+
+  this.state = {
+    showMenu: false,
+    visible:false,
+    product:NaN,
+    count:0,
+  };
+
+  this.showMenu = this.showMenu.bind(this);
+  this.closeMenu = this.closeMenu.bind(this);
+}
+
+showMenu(event) {
+  event.preventDefault();
+
+  this.setState({ showMenu: true }, () => {
+    document.addEventListener('click', this.closeMenu);
+  });
+}
+
+closeMenu(event) {
+
+  if (!this.dropdownMenu.contains(event.target)) {
+
+    this.setState({ showMenu: false }, () => {
+      document.removeEventListener('click', this.closeMenu);
+    });
+
+  }
+}
+  dropdown(array)
+  {
+    var count=0;
+    return(
+      &lt;div>
+        &lt;button onClick={this.showMenu}>
+          Possible Save Locations
+        &lt;/button>
+
+        {this.state.showMenu? (
+              &lt;div
+                className="menu"
+                ref={(element) => {
+                  this.dropdownMenu = element;
+                }}>
+                {array.map((item, i)=>{
+                    return(
+                      &lt;button onClick={(e) => {e.preventDefault();
+                       count = this.getResults(item);
+                        this.setState({ product: item ,count: count, visible:true}, () => {
+
+                        });
+
+                         }}>
+                        {item}
+                      &lt;/button>
+                    );
+                  })}
+              &lt;/div>)
+              : (null)
+        }
+      &lt;/div>
+    );
+
+  }
+
+  getCollections()
+  {
+      var snapshot;
+      var array = [];
+      var count = 0;
+      const databaseRef = firebase.database().ref("/");
+
+      databaseRef.on('value', function(snapshot){
+        snapshot.forEach(function(childSnapshot,index){
+
+          var childKey = childSnapshot.key;
+          console.log("child key = " + childKey);
+          array[count] = childKey;
+          count++;
+        });
+      });
+      array[count] ="[New Save Location]";
+      return array;
+  }
+  getResults(item)
+  {
+      var snapshot;
+      var count =0;
+      const databaseRef = firebase.database().ref("/");
+      const trainerRef = databaseRef.child(item);
+
+      console.log("databaseRef: " + databaseRef);
+      console.log("trainerRef: " + trainerRef);
+
+      trainerRef.on('value', function(snapshot){
+        snapshot.forEach(function(childSnapshot){
+
+          var childKey = childSnapshot.key;
+          var childData = childSnapshot.val();
+          //Date
+          console.log("child key = " + childKey);
+          console.log("child Data = "+ childData);
+          count++;
+          childSnapshot.forEach(function(childChildSnapshot){
+            var childChildKey = childChildSnapshot.key;
+
+            //Data/Preamble
+            //console.log("Child child key = " + childChildKey);
+
+            childChildSnapshot.forEach(function(childChildChildSnapshot){
+              var childChildChildKey = childChildChildSnapshot.key;
+
+              //Unique key
+              //console.log("Child child child key = " + childChildChildKey);
+
+              childChildChildSnapshot.forEach(function(childChildChildChildSnapshot){
+                var childChildChildChildKey = childChildChildChildSnapshot.key;
+                var childChildChildChildData = childChildChildChildSnapshot.val();
+
+                //Actual Data
+                //console.log(childChildChildChildKey +" = "+ childChildChildChildData);
+
+
+              });
+            });
+
+          });
+        });
+      });
+
+      return count;
+  }
+
+render()
+  {
+    var array = this.getCollections();
+    var upload = this.state.visible ? (
+    &lt;div>
+      &lt;ListedTimeOverTime count = {this.state.count} product = {this.state.product}/>
+      &lt;AveragePriceOverTime count = {this.state.count} product = {this.state.product}/>
+      &lt;SizePriceOverTime count = {this.state.count} product = {this.state.product}/>
+      &lt;DecayRate/>
+    &lt;/div>
+  ):(&lt;div/>);
+
+      return(
+        &lt;div>
+          &lt;h1>Over-Time Analysis&lt;/h1>
+          &lt;OverTimeText/>
+          &lt;SearchBar/>
+          {this.dropdown(array)}
+          {upload }
+
+        &lt;/div>
+      );
+  }
+
+}
+
+export default OverTimeAnalysis;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Mon Apr 27 2020 15:21:06 GMT+0100 (British Summer Time)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+        </p>
+    </div>
+</footer>
+
+
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

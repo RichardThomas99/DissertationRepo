@@ -10,6 +10,26 @@ import SizePriceOverTime from './components/SizePriceOverTime';
 
 import * as firebase from 'firebase';
 
+/**
+ * A ReactJS class which renders all the components relating to the over-time
+ * analysis of the product listing
+ *
+ * @example
+ *   return (
+ *    <div>
+ *      <h1>Over-Time Analysis</h1>
+ *      <OverTimeText/>
+ *      <SearchBar/>
+ *      {this.dropdown(array)}
+ *      <div>
+ *        <ListedTimeOverTime count = {this.state.count} product = {this.state.product}/>
+ *        <AveragePriceOverTime count = {this.state.count} product = {this.state.product}/>
+ *        <SizePriceOverTime count = {this.state.count} product = {this.state.product}/>
+ *        <DecayRate/>
+ *      </div>
+      </div>
+ * )
+ */
 class OverTimeAnalysis extends Component
 {
   constructor() {

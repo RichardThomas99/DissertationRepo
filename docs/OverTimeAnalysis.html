@@ -1,11 +1,9 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: RealTimeAnalysis.js</title>
+    <title>JSDoc: OverTimeAnalysis</title>
 
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -53,114 +51,162 @@
             <div class="column is-9-desktop">
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
-                        <p>Source</p>
-                        <h1>RealTimeAnalysis.js</h1>
+                        <p>Class</p>
+                        <h1>OverTimeAnalysis</h1>
                     </header>
                     
                     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import React, {Component} from 'react';
-import SearchBar from './components/SearchBar'
+        <h2><span class="attribs"><span class="type-signature"></span></span>OverTimeAnalysis<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>A ReactJS class which renders all the components relating to the over-time
+analysis of the product listing</p></div>
+        
+    
+</header>
 
-//components
-import PriceDistributionGraph from './components/PriceDistributionGraph';
-import AveragePrice from './components/AveragePrice';
-import SizeAnalysis from './components/SizeAnalysis';
-import Data from './data/data.json';
-import Product from './components/productInJson'
-import ListedTimeDistribution from './components/ListedTimeDistribution.js'
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <h3 class="title"><span>Constructor</span></h3>
+                <div class="members">
+                    <div class="member">
 
 
-/**
- * A ReactJS class which renders all the components relating to the real-time
- * analysis of the product listing
- * @example
- * return (
- *         &lt;h1>RealTimeAnalysis&lt;/h1>
- *         &lt;SearchBar/>
- *         &lt;Product/>
- *         &lt;AveragePrice/>
- *         &lt;h2>*****************************************************************************************&lt;/h2>
- *         &lt;PriceDistributionGraph/>
- *         &lt;h2>*****************************************************************************************&lt;/h2>
- *         &lt;SizeAnalysis/>
- *         &lt;h2>*****************************************************************************************&lt;/h2>
- *         &lt;ListedTimeDistribution/>
- * )
- */
-class RealTimeAnalysis extends Component
-{
-  sanitiseData()
-  {
-    var currency ="";
-    var price=0.0;
-    var priceText="";
+    
+    <h4 class="name" id="OverTimeAnalysis">
+        <a class="href-link" href="#OverTimeAnalysis">#</a>
+        
+        <span class="code-name">
+            
+                new OverTimeAnalysis<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
 
-    Data.map(function(content,index)
-    {
-      priceText = content.price;
+    
+    
 
-      currency = priceText.substring(0,1);
-      price = parseFloat(priceText.substring(1));
 
-      if(priceText.length>9)
-      {
-        price= parseFloat(priceText.split(currency)[2]);
-      }
-      if(currency == "$")
-      {
-        console.log(price+" , "+parseFloat(price*0.8));
-        content.price = "£"+parseFloat(price*0.8);
-      }
-      else if (currency =="€") {
-        content.price = "£"+parseFloat(price*0.88);
-      }
-      else {
-        content.price = currency+ price;
-      }
 
-    });
 
-  }
-render()
-  {
-    this.sanitiseData();
-      return(
-        &lt;div>
-          &lt;h1>RealTimeAnalysis&lt;/h1>
-          &lt;SearchBar/>
-          &lt;Product/>
-          &lt;h2>*****************************************************************************************&lt;/h2>
 
-          &lt;AveragePrice/>
 
-          &lt;h2>*****************************************************************************************&lt;/h2>
 
-          &lt;PriceDistributionGraph/>
 
-          &lt;h2>*****************************************************************************************&lt;/h2>
 
-          &lt;SizeAnalysis/>
 
-          &lt;h2>*****************************************************************************************&lt;/h2>
 
-          &lt;ListedTimeDistribution/>
 
-        &lt;/div>
-      );
-  }
 
-}
+<dl class="details">
 
-export default RealTimeAnalysis;
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="OverTimeAnalysis.js.html" class="button">View Source</a>
+            <span>
+                <a href="OverTimeAnalysis.js.html">OverTimeAnalysis.js</a>, <a href="OverTimeAnalysis.js.html#line35">line 35</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>return (   &lt;div>     &lt;h1>Over-Time Analysis&lt;/h1>     &lt;OverTimeText/>     &lt;SearchBar/>     {this.dropdown(array)}     &lt;div>       &lt;ListedTimeOverTime count = {this.state.count} product = {this.state.product}/>       &lt;AveragePriceOverTime count = {this.state.count} product = {this.state.product}/>       &lt;SizePriceOverTime count = {this.state.count} product = {this.state.product}/>       &lt;DecayRate/>     &lt;/div>
+      &lt;/div>)</code></pre>
+    
+
+
+</div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
