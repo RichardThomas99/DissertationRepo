@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Data from '../data/data.json';
-import ConvertCurrency from '../dataManipulationScripts/convertCurrency.js';
 
 class TopListings extends Component
 {
@@ -9,21 +8,20 @@ calcScore()
 {
   var scores =[];
   var score = 100;
-  var homeLocation = ["GB","United Kingdom","Reino Unido","UK"]
   var listed =[] ;
   var timeListed = "";
   var size=0.0;
 
+  //General Weighting settings
+  var numberOfTotalWeights = 4;
+  var timeListedWeight=5;
+  var sizeWeight=7;
+  var priceWeight=10;
+  var sellerWeight=4;
+
   Data.map(function(content,index)
   {
-    score=50;
-
-    //Location Component
-    // if(homeLocation.includes(((content.location).split(','))[1].substring(1)))
-    // {
-    //   score = score+5;
-    // }
-
+    score=0;
 
 
     //Time Listed Component
@@ -31,19 +29,19 @@ calcScore()
     timeListed = (listed.split(" "))[2];
     if(timeListed === "SECONDS")
     {
-      score += 8;
+      score += 10*timeListedWeight;
     }
     else if(timeListed === "MINUTES")
     {
-      score += 6;
+      score += 8*timeListedWeight;
     }
     else if(timeListed === "DAYS")
     {
-      score += 3;
+      score += 5*timeListedWeight;
     }
     else if(timeListed === "WEEKS")
     {
-      score += 1;
+      score += 2*timeListedWeight;
     }
 
     //Size Component
@@ -53,11 +51,11 @@ calcScore()
     {
       if(size>=9)
       {
-        score = score + 9-(size%9);
+        score = score + 10-(size%9)*sizeWeight;
       }
       else
       {
-        score = score + (size%9);
+        score = score + ((size%9)+1)*sizeWeight;
       }
     }
 
@@ -66,7 +64,14 @@ calcScore()
 
     //The lower the price the higher the score addition
     //DOUBLE CHECK THE 500 VALUE, IF GOODS ARE GREATER THAN 500 WE HAVE A PROBLEM
-    score = score + ((500-price)/25)
+    if(price>500)
+    {
+      score = score - 5;
+    }
+    else {
+      score = score + (-0.02*price + 10)*priceWeight;
+    }
+    console.log("price score = "+ (-0.02*price + 10)*priceWeight);
 
 
 
@@ -88,26 +93,29 @@ calcScore()
 
     if(content.reviews<10)
     {
-      score = score + starCount*0.5;
+      score = score + starCount*1*sellerWeight;
     }
     else if(content.reviews < 50)
     {
-      score = score +starCount*1;
+      score = score +starCount*1.5*sellerWeight;
     }
     else {
-      score = score + starCount*1.5;
+      score = score + starCount*2*sellerWeight;
     }
 
+
+    console.log("score = " + score);
+    score=score/numberOfTotalWeights;
     scores[index] = score;
 
   })
   return scores;
 }
+
 printAllData(scores)
 {
 
   return Data.map((content, index)=>{
-    var url =content.url;
 
     return(<div>
     <h1>{index}</h1>
@@ -125,6 +133,7 @@ printAllData(scores)
     </div>);
   })
 }
+
 calcAvePrice()
 {
   var total =0;

@@ -6,12 +6,12 @@ import Product from './productInJson'
 class SearchBar extends Component
 {
 
-  httpGet(searchTerm)
+  httpGet(url)
   {
     try
     {
       var xmlHttp = new XMLHttpRequest();
-      xmlHttp.open( "GET", "http://localhost:5000/?url="+searchTerm, false ); // false for synchronous request
+      xmlHttp.open( "GET", "http://localhost:5000/?url="+url, false ); // false for synchronous request
       xmlHttp.send( null );
     }
     catch(exception)
@@ -27,8 +27,8 @@ class SearchBar extends Component
     var searchTerm = document.getElementById("textSearch").value;
     console.log("Search Term: " + searchTerm);
 
-    searchTerm = 'https://www.depop.com/search/?q='+searchTerm;
-    this.httpGet(searchTerm);
+    var url = searchTerm = 'https://www.depop.com/search/?q='+searchTerm;
+    this.httpGet(url);
   }
 
 
