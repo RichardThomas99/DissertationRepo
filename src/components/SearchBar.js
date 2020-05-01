@@ -5,15 +5,17 @@ import Product from './productInJson'
 
 class SearchBar extends Component
 {
-
+  /*Function for sending the xmlHttpRequest to the python server
+  *The url string string is passed in as a variable*/
   httpGet(url)
   {
     try
     {
       var xmlHttp = new XMLHttpRequest();
-      xmlHttp.open( "GET", "http://localhost:5000/?url="+url, false ); // false for synchronous request
+      xmlHttp.open( "GET", "http://localhost:5000/?url="+url, true );
       xmlHttp.send( null );
     }
+    //Catches all exceptions and prints out a relevant error in console.
     catch(exception)
     {
         console.log('There was an ERROR CAUGHT running the httpGet request of the python server! The exception was: '+ exception);
@@ -25,8 +27,6 @@ class SearchBar extends Component
   {
 
     var searchTerm = document.getElementById("textSearch").value;
-    console.log("Search Term: " + searchTerm);
-
     var url = searchTerm = 'https://www.depop.com/search/?q='+searchTerm;
     this.httpGet(url);
   }

@@ -23,7 +23,7 @@ class uploadScrape extends Component
   }
 
   //Function to stop overwriting todays scrape data
-  checkIfDateIsWritten()
+  checkIfDateIsWritten(product)
   {
       var date = this.state.date;
       var snapshot;
@@ -31,22 +31,19 @@ class uploadScrape extends Component
       var unique = true;
       const databaseRef = firebase.database().ref("/");
 
-
-      //Determining the reference for
-      databaseRef.on('value', function(snapshot){
+      const trainerRef = firebase.database().ref().child(product);
+      trainerRef.on('value', function(snapshot){
         snapshot.forEach(function(childSnapshot,index){
-          childSnapshot.forEach(function(childChildSnapshot,index){
+          var snapshotDate = childSnapshot.key;
 
-
-            var childChildKey = childChildSnapshot.key;
-            if(date == childChildKey)
-            {
-              console.log("Date matches");
-              unique = false;
-            }
-          });
+          if(date == snapshotDate)
+          {
+            unique = false;
+          }
         });
       });
+
+
       return unique;
   }
 
@@ -153,12 +150,6 @@ getSize(desc)
 
     Data.map((content,index)=>
     {
-      /*Price calculations .... */
-      if((content.price).length>7)
-      {
-
-      }
-
       price = parseInt((content.price).substring(1));
 
       if((price<maxPrice) &&(price>=minPrice))
