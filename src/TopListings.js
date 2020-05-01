@@ -62,9 +62,12 @@ render()
 
         <div>
           <h1>TopListings</h1>
-          <ScoreText/>
           <SearchBar/>
           <Product/>
+          <ScoreText/>
+
+          <h2>*****************************************************************************************</h2>
+
           <ScoreList/>
         </div>
       );

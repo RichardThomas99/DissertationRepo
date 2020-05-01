@@ -157,15 +157,9 @@ class SizePriceOverTime extends Component
     <div>
 
     <h2>Size Price Average OverTime: </h2>
-    <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.If the rate is between 0 and 1 the price is falling over time. If the rate is greater than 1 then the price is increasing.</p>
-    <p>Settings behind the decay-rate are listed below. </p>
+    <p>This component illustrates how the average price of different sizes is changing over time. It also allows to see how the quantity of trainers for each size is changing.</p> 
     {sizePriceArray}
     {this.graph(sizePriceArray[0],sizePriceArray[1])}
-      <ul id="content-list">
-          <li>Original Array Used = Untampered</li>
-          <li>Lower bounds = £{lowerBound}</li>
-          <li>Upper bounds = £{upperBound}</li>
-      </ul>
     </div>
   );
  }

@@ -21,7 +21,7 @@ class productInJson extends Component
 
   return (
     <div>
-      {product}
+      <h2>Product Analysed = {product}</h2>
     </div>
   );
   }

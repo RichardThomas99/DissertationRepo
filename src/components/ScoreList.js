@@ -7,7 +7,7 @@ class TopListings extends Component
 calcScore()
 {
   var scores =[];
-  var score = 100;
+  var score = 0;
   var listed =[] ;
   var timeListed = "";
   var size=0.0;
@@ -22,7 +22,6 @@ calcScore()
   Data.map(function(content,index)
   {
     score=0;
-
 
     //Time Listed Component
     listed = content.listed;
@@ -62,23 +61,22 @@ calcScore()
     //Price Components
     var price = parseFloat(content.price.substring(1));
 
-    //The lower the price the higher the score addition
-    //DOUBLE CHECK THE 500 VALUE, IF GOODS ARE GREATER THAN 500 WE HAVE A PROBLEM
+    /*The lower the price the higher the score addition using a linear y=mx+c
+    *relationship for score against price. Sets max price accepted as 500*/
     if(price>500)
     {
-      score = score - 5;
+      score = score - 5; //Anything above £500 gets its score detrimented.
     }
     else {
       score = score + (-0.02*price + 10)*priceWeight;
     }
-    console.log("price score = "+ (-0.02*price + 10)*priceWeight);
-
 
 
     //SELLER RATING
     var stars = content.stars.split("<");
     var starCount=0;
 
+    //Calculates the number of stars rating a seller has
     for(var i=0;i<stars.length;i++)
     {
       if(stars[i]=="Full Star")
@@ -91,6 +89,7 @@ calcScore()
       }
     }
 
+    //Groups the number of reviews a user has
     if(content.reviews<10)
     {
       score = score + starCount*1*sellerWeight;
@@ -103,11 +102,10 @@ calcScore()
       score = score + starCount*2*sellerWeight;
     }
 
-
-    console.log("score = " + score);
+    //Returns a score out of 100
     score=score/numberOfTotalWeights;
-    scores[index] = score;
 
+    scores[index] = score;
   })
   return scores;
 }
@@ -118,7 +116,6 @@ printAllData(scores)
   return Data.map((content, index)=>{
 
     return(<div>
-    <h1>{index}</h1>
     <h1>{scores[index]}</h1>
     <h3>{content.seller}</h3>
     <p>{content.desc}</p>

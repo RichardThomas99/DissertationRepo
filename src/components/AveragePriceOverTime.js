@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
 class AveragePriceOverTime extends Component
@@ -21,9 +21,8 @@ class AveragePriceOverTime extends Component
     }
 
 
-    const renderBarChart = (
-
-      <BarChart
+    const renderScatterChart = (
+      <ScatterChart
             width={1500}
             height={350}
             data={dataArray}
@@ -33,15 +32,16 @@ class AveragePriceOverTime extends Component
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="Date" />
-            <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
+            <YAxis/>
             <Tooltip />
             <Legend verticalAlign="top" wrapperStyle={{ lineHeight: '40px' }} />
+            <Scatter dataKey="AveragePriceArray" fill='#8884d8' line lineJointType='fitting'/>
 
-            <Bar yAxisId="left" dataKey="AveragePriceArray" fill="#8884d8" />
-          </BarChart>
+          </ScatterChart>
+
     );
 
-      return renderBarChart;
+      return renderScatterChart;
 
   }
 
@@ -92,14 +92,12 @@ class AveragePriceOverTime extends Component
           });
         });
       });
-      console.log("date Array = " + dateArray);
-      console.log("Average Price Array = " + averagePriceArray );
+
     return [averagePriceArray,dateArray];
   }
   render()
   {
     var averagePriceArray="";
-    console.log("in listedTime !!!!!!!!!!!!!!!!!!  = " + this.props.product);
 
     averagePriceArray = this.averagePriceArray(this.props.product);
 
@@ -114,9 +112,9 @@ class AveragePriceOverTime extends Component
   return (
     <div>
 
-    <h2>Average Price OverTime: </h2>
-    <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.If the rate is between 0 and 1 the price is falling over time. If the rate is greater than 1 then the price is increasing.</p>
-    <p>Settings behind the decay-rate are listed below. </p>
+    <h2>Average Price Over-Time: </h2>
+    <p>The Average Price Over-Time component displays a scatter graph plotting the average price of the product over time.</p>
+    <p>Settings behind this component are listed below. </p>
     {averagePriceArray}
     {this.graph(averagePriceArray[0],averagePriceArray[1])}
       <ul id="content-list">

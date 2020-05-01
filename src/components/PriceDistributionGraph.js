@@ -6,37 +6,40 @@ import Data from '../data/data.json';
 class PriceDistributionGraph extends Component
 {
 
+  //Component For producing graph component.
   graph(array,bucketSize,maximumBucket,numOfBuckets)
   {
     var dataArray = Array(numOfBuckets);
 
+    /*Setting the dataArray to contain the data of the graph*/
     for(var i=0;i<numOfBuckets;i++)
     {
       dataArray[i] =
       {
-        "name": (array[i][0]-bucketSize)+ "<" + array[i][0] ,
-        "Quantity": array[i][1],
-        "amt": 2400
+        /*The array[i][0] contains a price of the top end of a bucket*/
+        "Price Bracket": (array[i][0]-bucketSize)+ "<" + array[i][0] ,
+        /*Contains the quantity of listings at that price*/
+        "Quantity": array[i][1]
       }
     }
 
-
+    /*Creating a ReCharts graph variable to plot the dataArray data*/
     const renderBarChart = (
 
       <AreaChart width={950} height={250} data={dataArray}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="Price Bracket" />
         <YAxis />
         <Tooltip />
         <Legend />
         <ReferenceLine y={0} stroke="#000" />
-        <Brush dataKey="name" height={30} stroke="#8884d8" />
+        <Brush dataKey="Price Bracket" height={30} stroke="#8884d8" />
         <Area type="monotone" dataKey="Quantity" stroke="#8884d8" fill="#8884d8" />
       </AreaChart>
     );
 
-      return renderBarChart;
-
+    /*Exporting the graph*/
+    return renderBarChart;
   }
 
   printDistribution(c, bucketSize)

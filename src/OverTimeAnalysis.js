@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 //Components
 import OverTimeText from './components/OverTimeText';
-import SearchBar from './components/SearchBar';
 import DecayRate from './components/DecayRate';
 import AveragePriceOverTime from './components/AveragePriceOverTime';
 import ListedTimeOverTime from './components/ListedTimeOverTime';
@@ -175,10 +174,11 @@ render()
     var array = this.getCollections();
     var upload = this.state.visible ? (
     <div>
-      <ListedTimeOverTime count = {this.state.count} product = {this.state.product}/>
-      <AveragePriceOverTime count = {this.state.count} product = {this.state.product}/>
-      <SizePriceOverTime count = {this.state.count} product = {this.state.product}/>
       <DecayRate/>
+      <AveragePriceOverTime count = {this.state.count} product = {this.state.product}/>
+      <ListedTimeOverTime count = {this.state.count} product = {this.state.product}/>
+      <SizePriceOverTime count = {this.state.count} product = {this.state.product}/>
+
     </div>
   ):(<div/>);
 
@@ -186,7 +186,6 @@ render()
         <div>
           <h1>Over-Time Analysis</h1>
           <OverTimeText/>
-          <SearchBar/>
           {this.dropdown(array)}
           {upload }
 

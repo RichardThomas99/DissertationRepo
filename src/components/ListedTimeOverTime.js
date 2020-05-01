@@ -106,17 +106,12 @@ class ListedTimeOverTime extends Component
     var lowerBound = 0.00;
     var upperBound = 250.00;
 
-    if(!this.props.loading)
-    {
-    }
-
-
   return (
     <div>
 
-    <h2>ListedTime Average OverTime: </h2>
-    <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.If the rate is between 0 and 1 the price is falling over time. If the rate is greater than 1 then the price is increasing.</p>
-    <p>Settings behind the decay-rate are listed below. </p>
+    <h2>Average Listed Time OverTime: </h2>
+    <p>This component contains a graph element which illustrates the average listing time over time.</p>
+    <p>Settings behind this component are listed below. </p>
     {listedTimeArray}
     {this.graph(listedTimeArray[0],listedTimeArray[1])}
       <ul id="content-list">

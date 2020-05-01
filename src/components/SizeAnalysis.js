@@ -180,7 +180,7 @@ class SizeAnalysis extends Component
     <div>
         <h3>Size Analysis</h3>
 
-        <p>Settings behind this size analysis are listed below: </p>
+        <p>This component illustrates how the price and quantity varies for different sizes. It clearly shows that size has a massive effect on average price of listings.</p>
 
         {this.graph(distribution[0],distribution[1])}
 

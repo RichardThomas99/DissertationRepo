@@ -132,16 +132,12 @@ class DecayRate extends Component
     var lowerBound = 0.00;
     var upperBound = 250.00;
 
-    if(!this.props.loading)
-    {
-    }
-
-
   return (
     <div>
 
     <h2>Decay-Rate: {decayRate} </h2>
-    <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.</p>
+    <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.If the rate is between 0 and 1 the price is falling over time. If the rate is greater than 1 then the price is increasing.</p>
+    <p>It calculates this rate through using all of the data points avaliable.</p>
     </div>
   );
  }

@@ -6,7 +6,7 @@ function OverTimeText()
 
   return(
     <div>
-      <h4>Over Time will read data and components from the database and then construct the front end like Datasets "Current Analysis"</h4>
+      <h4>This Over-Time section presents analysis and provides insight into the long-term trends of the data stored in the database..</h4>
     </div>
   );
 }

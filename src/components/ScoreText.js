@@ -6,9 +6,8 @@ function ScoreText()
 
   return(
     <div>
-    <h4>Score Element to presented in table component below</h4>
+    <p>Each listing is scored out of 100 so the better the listing the closer to 100 it is.</p>
 
-    <p>Score to be out of 100 and to indexed so the better the listing the closer to 100 it is.</p>
     </div>
   );
 }

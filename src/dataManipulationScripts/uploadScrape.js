@@ -21,18 +21,22 @@ class uploadScrape extends Component
     console.log("DATE = " + date);
     return date;
   }
+
+  //Function to stop overwriting todays scrape data
   checkIfDateIsWritten()
   {
       var date = this.state.date;
       var snapshot;
       var array = [];
-      var count = 0;
       var unique = true;
       const databaseRef = firebase.database().ref("/");
 
+
+      //Determining the reference for
       databaseRef.on('value', function(snapshot){
         snapshot.forEach(function(childSnapshot,index){
           childSnapshot.forEach(function(childChildSnapshot,index){
+
 
             var childChildKey = childChildSnapshot.key;
             if(date == childChildKey)
@@ -209,15 +213,18 @@ getSize(desc)
 
     return [averagePrice,minPrice,maxPrice,distribution[0],distribution[1],averageListed];
   }
+
+  //Writing the preamble in firebase
   writePreambleData(product)
   {
-    console.log("Preamble data function ");
     var dataArray = [];
     var date = this.state.date;
+    //Getting a reference to the specific database location
     const trainerRef = firebase.database().ref().child(product);
     const dateRef = trainerRef.child(date);
     const preambleRef = dateRef.child("Preamble");
 
+    //Getting the preamble data
     var preambleData = this.calcPreambleData();
 
     dataArray =
@@ -230,9 +237,10 @@ getSize(desc)
       averageListed: preambleData[5],
     };
 
-      preambleRef.push(dataArray)
+    //Writing the array to firebase
+    preambleRef.push(dataArray)
 
-      return 0;
+    return 0;
   }
 writeData(product)
 {
@@ -260,6 +268,7 @@ writeData(product)
   });
     return 0;
 }
+
 getProduct()
 {
   var product;
@@ -276,10 +285,12 @@ getProduct()
   product = product.replace(/ /g,'');
   return product;
 }
+
 writeToFirebase()
 {
   var productTitle = this.props.term;
-  console.log("product = " + productTitle);
+
+  //If the productTitle isn't a sufficient. Calculate the new product name
   if((productTitle.length<4)||(productTitle == "[New Save Location]") ||(productTitle =="[Not Set]"))
   {
     console.log("WRITE TO FIREBASE");
@@ -289,9 +300,8 @@ writeToFirebase()
   {
       productTitle = this.props.term;
   }
-  console.log(productTitle);
 
-  if(this.checkIfDateIsWritten())
+  if(this.checkIfDateIsWritten(productTitle))
   {
     console.log("check if date is written");
       this.writePreambleData(productTitle);
