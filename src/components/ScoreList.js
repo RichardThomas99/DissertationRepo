@@ -13,11 +13,12 @@ calcScore()
   var size=0.0;
 
   //General Weighting settings
-  var numberOfTotalWeights = 4;
-  var timeListedWeight=4;
-  var sizeWeight=10;
-  var priceWeight=20;
-  var sellerWeight=5;
+  var factorScoreMax = 10;
+  var timeListedWeight=400;
+  var sizeWeight=1000;
+  var priceWeight=2000;
+  var sellerWeight=500;
+  var sumOfWeights = timeListedWeight+sizeWeight+priceWeight+sellerWeight;
 
   Data.map(function(content,index)
   {
@@ -103,8 +104,7 @@ calcScore()
     }
 
     //Returns a score out of 100
-    score=score/numberOfTotalWeights;
-
+    score = (100*score)/(sumOfWeights*factorScoreMax)
     scores[index] = score;
   })
   return scores;
