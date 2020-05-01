@@ -110,7 +110,7 @@ class PriceDistributionGraph extends Component
 
     return (
     <div>
-        <h3>PriceDistributionGraph Method</h3>
+        <h3>Price Distribution Graph Element</h3>
 
         {this.graph(distribution,bucketSize,maximumBucket,numOfBuckets)}
 

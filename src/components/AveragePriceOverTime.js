@@ -115,7 +115,7 @@ class AveragePriceOverTime extends Component
     <h2>Average Price Over-Time: </h2>
     <p>The Average Price Over-Time component displays a scatter graph plotting the average price of the product over time.</p>
     <p>Settings behind this component are listed below. </p>
-    {averagePriceArray}
+    
     {this.graph(averagePriceArray[0],averagePriceArray[1])}
       <ul id="content-list">
           <li>Original Array Used = Untampered</li>

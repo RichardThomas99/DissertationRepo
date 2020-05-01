@@ -34,7 +34,7 @@ class AveragePrice extends Component
   return (
     <div>
 
-    <h3>Average Price: £{average}/></h3>
+    <h3>Average Price: £{average}</h3>
     <p>Settings behind this average are listed below. </p>
       <ul id="content-list">
           <li>Original Array Used = Untampered</li>

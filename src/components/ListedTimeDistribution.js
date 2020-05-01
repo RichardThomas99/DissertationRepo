@@ -142,12 +142,6 @@ class ListedTimeDistribution extends Component
             <p>Original Array Used = Untampered</p>
             <p> Bucket Size = {bucketSize}</p>
             <p> Maximum Bucket = {maximumBucket}</p>
-
-
-
-        <h3>Raw Distribution Data: </h3>
-        {/*this.printDistribution(distribution,bucketSize,numOfBuckets)*/}
-
     </div>
   );
  }

@@ -112,7 +112,7 @@ class ListedTimeOverTime extends Component
     <h2>Average Listed Time OverTime: </h2>
     <p>This component contains a graph element which illustrates the average listing time over time.</p>
     <p>Settings behind this component are listed below. </p>
-    {listedTimeArray}
+    
     {this.graph(listedTimeArray[0],listedTimeArray[1])}
       <ul id="content-list">
           <li>Original Array Used = Untampered</li>

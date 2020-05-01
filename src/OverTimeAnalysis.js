@@ -117,7 +117,6 @@ closeMenu(event) {
           count++;
         });
       });
-      array[count] ="[New Save Location]";
       return array;
   }
   getResults(item)
