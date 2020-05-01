@@ -103,7 +103,6 @@ closeMenu(event) {
     var array = this.getCollections();
     const upload = this.state.visible ? (
       <div>
-      {console.log("UPLOADSCRAPE CALL StorePopUp")}
       <UploadScrape term = {this.state.saveLocation}/>
       </div>
     ):(<div/>);
@@ -112,7 +111,7 @@ closeMenu(event) {
     <div>
 
     <h3>Current JSON contains = {this.state.currentJSON}</h3>
-    <p>Choose the save location of the new JSON from the dropdown below </p>
+    <p>Choose the save location of the data from the dropdown below </p>
 
 
     {this.dropdown(array)}

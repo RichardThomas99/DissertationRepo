@@ -19,7 +19,7 @@ class PriceDistributionGraph extends Component
         /*The array[i][0] contains a price of the top end of a bucket*/
         "Price Bracket": (array[i][0]-bucketSize)+ "<" + array[i][0] ,
         /*Contains the quantity of listings at that price*/
-        "Quantity": array[i][1]
+        "Price (£)": array[i][1]
       }
     }
 
@@ -34,7 +34,7 @@ class PriceDistributionGraph extends Component
         <Legend />
         <ReferenceLine y={0} stroke="#000" />
         <Brush dataKey="Price Bracket" height={30} stroke="#8884d8" />
-        <Area type="monotone" dataKey="Quantity" stroke="#8884d8" fill="#8884d8" />
+        <Area type="monotone" dataKey="Price (£)" stroke="#8884d8" fill="#8884d8" />
       </AreaChart>
     );
 

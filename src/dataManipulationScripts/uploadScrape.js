@@ -293,7 +293,6 @@ writeToFirebase()
   //If the productTitle isn't a sufficient. Calculate the new product name
   if((productTitle.length<4)||(productTitle == "[New Save Location]") ||(productTitle =="[Not Set]"))
   {
-    console.log("WRITE TO FIREBASE");
     productTitle = this.getProduct();
   }
   else
@@ -303,7 +302,6 @@ writeToFirebase()
 
   if(this.checkIfDateIsWritten(productTitle))
   {
-    console.log("check if date is written");
       this.writePreambleData(productTitle);
       this.writeData(productTitle);
   }
@@ -311,11 +309,7 @@ writeToFirebase()
 
 render()
 {
-  console.log("uploadScrape class");
-
   this.writeToFirebase();
-
-
 
   return(
     <div>

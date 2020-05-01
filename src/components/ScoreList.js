@@ -14,10 +14,10 @@ calcScore()
 
   //General Weighting settings
   var numberOfTotalWeights = 4;
-  var timeListedWeight=5;
-  var sizeWeight=7;
-  var priceWeight=10;
-  var sellerWeight=4;
+  var timeListedWeight=4;
+  var sizeWeight=10;
+  var priceWeight=20;
+  var sellerWeight=5;
 
   Data.map(function(content,index)
   {
