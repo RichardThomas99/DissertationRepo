@@ -18,39 +18,13 @@ const client = new ApolloClient({
   uri: 'https://graphql.depop.com/'
 })
 
+
+/**
+ * The main class for the project which defines the react router pathways for
+ * the software.
+ */
 class App extends Component
 {
-  /* NEED TO MOVE MAINNAV THIS TO JUST THE PAGES WHICH USE THIS NAV BAR. OTHERWISE IT WILL APPEAR ON THE SETTINGS ASWELL.*/
-
-constructor()
-{
-  super();
-  this.state = {
-    averagePrice:0
-  };
-}
-
-componentDidMount()
-{
-
-    const trainerRef = firebase.database().ref().child('TrainerNameID');
-    const indexRef = trainerRef.child('IndexedValue');
-    const averagePriceRef = indexRef.child('AveragePrice');
-
-    // console.log("trainerRef: " + trainerRef);
-    // console.log("indexRef: " + indexRef);
-    // console.log("averagePriceRef: " + averagePriceRef);
-
-    averagePriceRef.on('value', snap =>{
-      // console.log(snap.val());
-
-      this.setState({
-        averagePrice: snap.val()
-      });
-    });
-
-    return 0;
-}
 
 render()
 {
@@ -62,8 +36,6 @@ render()
 
         <Nav/>
         <MainNav/>
-
-
         <Route path = "/Settings" component ={Settings}/>
         <Route path = "/RealTimeAnalysis" component ={RealTimeAnalysis}/>
         <Route path = "/TopListings" component ={TopListings}/>

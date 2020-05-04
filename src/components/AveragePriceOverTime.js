@@ -4,6 +4,25 @@ import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
+
+/**
+ * A ReactJS class which produces a graph to illustrate the average price over time.
+ * @example
+ * return (
+ *   <div>
+ *    <h2>Average Price Over-Time: </h2>
+ *     <p>The Average Price Over-Time component displays a scatter graph plotting the average price of the product over time.</p>
+ *     <p>Settings behind this component are listed below. </p>
+ *
+ *      {this.graph(averagePriceArray[0],averagePriceArray[1])}
+ *       <ul id="content-list">
+ *           <li>Original Array Used = Untampered</li>
+ *           <li>Lower bounds = £{lowerBound}</li>
+ *           <li>Upper bounds = £{upperBound}</li>
+ *       </ul>
+ *   </div>
+ * )
+ */
 class AveragePriceOverTime extends Component
 {
   graph(averagePriceArray,dateArray)
@@ -104,10 +123,6 @@ class AveragePriceOverTime extends Component
     var lowerBound = 0.00;
     var upperBound = 250.00;
 
-    if(!this.props.loading)
-    {
-    }
-
 
   return (
     <div>
@@ -115,7 +130,7 @@ class AveragePriceOverTime extends Component
     <h2>Average Price Over-Time: </h2>
     <p>The Average Price Over-Time component displays a scatter graph plotting the average price of the product over time.</p>
     <p>Settings behind this component are listed below. </p>
-    
+
     {this.graph(averagePriceArray[0],averagePriceArray[1])}
       <ul id="content-list">
           <li>Original Array Used = Untampered</li>

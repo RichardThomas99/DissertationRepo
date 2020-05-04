@@ -37,7 +37,7 @@ class RealTimeAnalysis extends Component
 
     Data.map(function(content,index)
     {
-      priceText = content.price;
+      priceText = content.Price;
 
       currency = priceText.substring(0,1);
       price = parseFloat(priceText.substring(1));
@@ -49,13 +49,13 @@ class RealTimeAnalysis extends Component
       if(currency == "$")
       {
         console.log(price+" , "+parseFloat(price*0.8));
-        content.price = "£"+parseFloat(price*0.8);
+        content.Price = "£"+parseFloat(price*0.8);
       }
       else if (currency =="€") {
-        content.price = "£"+parseFloat(price*0.88);
+        content.Price = "£"+parseFloat(price*0.88);
       }
       else {
-        content.price = currency+ price;
+        content.Price = currency+ price;
       }
 
     });

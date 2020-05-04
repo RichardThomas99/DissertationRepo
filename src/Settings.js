@@ -5,7 +5,10 @@ import Data from './data/data.json'
 class Settings extends Component
 {
 
-
+  /**
+   * A ReactJS class which allows the user to save the JSON contents to
+   * the firebase database.
+   */
   render()
   {
       return(

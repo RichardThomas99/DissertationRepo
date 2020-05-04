@@ -4,12 +4,22 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
+/**
+ * A ReactJS class which generates a Size Price Average Over Time Graph.
+ * @example
+ * return (
+ *   <div>
+ *       <h2>Size Price Average OverTime: </h2>
+ *       <p>This component illustrates how the average price of different sizes is changing over time. It also allows to see how the quantity of trainers for each size is changing.</p>
+ *       {this.graph(sizePriceArray[0],sizePriceArray[1])}
+ *   </div>
+ * )
+ */
 class SizePriceOverTime extends Component
 {
   graph(sizePriceArray,dateArray)
   {
     var arraySize = sizePriceArray.length;
-    console.log("AAAAAAA = "+arraySize);
     var dataArray = Array(arraySize);
 
     for(var i=0;i<arraySize;i++)
@@ -159,7 +169,7 @@ class SizePriceOverTime extends Component
     <h2>Size Price Average OverTime: </h2>
     <p>This component illustrates how the average price of different sizes is changing over time. It also allows to see how the quantity of trainers for each size is changing.</p>
 
-    {this.graph(sizePriceArray[0],sizePriceArray[1])}
+      {this.graph(sizePriceArray[0],sizePriceArray[1])}
     </div>
   );
  }

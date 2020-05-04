@@ -1,8 +1,7 @@
 from flask import Flask
+from flask import request
 import os
 import xml.etree.ElementTree as ET
-from flask import request
-
 app = Flask(__name__)
 
 #Accepts any XMLHttpRequest
@@ -27,7 +26,7 @@ def cmdRun():
     filename = ""+filename
     tree.write(filename)
 
-    cmd = r"C:\Users\Richard\AppData\Roaming\SysNucleus\WebHarvy\WebHarvy.exe C:\Users\Richard\Documents\DissertationRepo\DissertationRepo\src\scraperConfig\depopConfig.xml 1  C:\Users\Richard\Documents\DissertationRepo\DissertationRepo\src\data\data.json overwrite"
+    cmd = r"C:\Users\Richard\AppData\Roaming\SysNucleus\WebHarvy\WebHarvy.exe C:\Users\Richard\Documents\DissertationRepo\DissertationRepo\src\scraperConfig\depopConfig.xml 1 C:\Users\Richard\Documents\DissertationRepo\DissertationRepo\src\data\data.json overwrite"
     os.system(cmd)
 
     return "os System Run"

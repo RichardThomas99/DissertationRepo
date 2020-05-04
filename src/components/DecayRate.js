@@ -1,6 +1,19 @@
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
 
+
+/**
+ * A ReactJS class which uses linear regression on the average price over time.
+ * This shows the rate of change of the average price as time goes on.
+ * @example
+ * return (
+ *   <div>
+ *       <h2>Decay-Rate: {decayRate} </h2>
+ *       <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.If the rate is between 0 and 1 the price is falling over time. If the rate is greater than 1 then the price is increasing.</p>
+ *       <p>It calculates this rate through using all of the data points avaliable.</p>
+ *   </div>
+ * )
+ */
 class DecayRate extends Component
 {
   convertDatesToIndex(dateArray)
@@ -44,8 +57,6 @@ class DecayRate extends Component
 
   leastSquares(xArray,yArray)
   {
-    console.log(xArray +"    -     " + yArray);
-
     var xAverage = this.averageOfArray(xArray);
     var yAverage = this.averageOfArray(yArray);
     var xInter;
@@ -63,6 +74,7 @@ class DecayRate extends Component
     }
     return (sum1/sum2);
   }
+
   calcDecayRate(item)
   {
       var snapshot;
@@ -134,10 +146,9 @@ class DecayRate extends Component
 
   return (
     <div>
-
-    <h2>Decay-Rate: {decayRate} </h2>
-    <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.If the rate is between 0 and 1 the price is falling over time. If the rate is greater than 1 then the price is increasing.</p>
-    <p>It calculates this rate through using all of the data points avaliable.</p>
+      <h2>Decay-Rate: {decayRate} </h2>
+      <p>The decay rate is a description of how quickly the average price of the trainer is changing over time.If the rate is between 0 and 1 the price is falling over time. If the rate is greater than 1 then the price is increasing.</p>
+      <p>It calculates this rate through using all of the data points avaliable.</p>
     </div>
   );
  }

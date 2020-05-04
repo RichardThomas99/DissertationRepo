@@ -5,6 +5,23 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import * as firebase from 'firebase';
 import UploadScrape from '../dataManipulationScripts/uploadScrape.js'
 
+
+/**
+ * A ReactJS class which generates a component which provides the components for the settings section of the software.
+ * @example
+ * return (
+ *     <div>
+ *          <h3>Current JSON contains = {this.state.currentJSON}</h3>
+ *          <p>Choose the save location of the data from the dropdown below </p>
+ *               {this.dropdown(array)}
+ *          <p>You are looking to put {this.state.currentJSON} in the location named: {this.state.saveLocation}</p>
+ *          <button onClick={() => {this.setState({visible: true});}}>
+ *              CONFIRM SAVE
+ *          </button>
+ *      {upload}
+ *   </div>
+ * )
+ */
 class StorePopUp extends Component
 {
 

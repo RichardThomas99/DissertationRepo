@@ -1,6 +1,21 @@
 import React, {Component} from 'react';
 import Data from '../data/data.json';
 
+/**
+ * A ReactJS class which calculates the average price of the listings in the JSON.
+ * @example
+ * return (
+ *   <div>
+ *      <h3>Average Price: £{average}</h3>
+ *     <p>Settings behind this average are listed below. </p>
+ *       <ul id="content-list">
+ *           <li>Original Array Used = Untampered</li>
+ *           <li>Lower bounds = £{lowerBound}</li>
+ *           <li>Upper bounds = £{upperBound}</li>
+ *       </ul>
+ *   </div>
+ * )
+ */
 class AveragePrice extends Component
 {
   calcAvePrice(maxPrice, minPrice)
@@ -12,7 +27,7 @@ class AveragePrice extends Component
     Data.map(function(content,index)
     {
 
-      price = parseInt((content.price).substring(1));
+      price = parseInt((content.Price).substring(1));
 
       if((price<maxPrice) &&(price>=minPrice))
       {

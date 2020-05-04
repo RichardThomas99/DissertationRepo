@@ -4,6 +4,27 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
+
+/**
+ * A ReactJS class which provides a graph component which shows how the average
+ * listed time changes over time.
+ * @example
+ * return (
+ * <div>
+ *
+ *   <h2>Average Listed Time OverTime: </h2>
+ *   <p>This component contains a graph element which illustrates the average listing time over time.</p>
+ *   <p>Settings behind this component are listed below. </p>
+ *
+ *   {this.graph(listedTimeArray[0],listedTimeArray[1])}
+ *      <ul id="content-list">
+ *         <li>Original Array Used = Untampered</li>
+ *         <li>Lower bounds = £{lowerBound}</li>
+ *         <li>Upper bounds = £{upperBound}</li>
+ *     </ul>
+ *   </div>
+ * )
+ */
 class ListedTimeOverTime extends Component
 {
   graph(listedTimeArray,dateArray)
@@ -112,7 +133,7 @@ class ListedTimeOverTime extends Component
     <h2>Average Listed Time OverTime: </h2>
     <p>This component contains a graph element which illustrates the average listing time over time.</p>
     <p>Settings behind this component are listed below. </p>
-    
+
     {this.graph(listedTimeArray[0],listedTimeArray[1])}
       <ul id="content-list">
           <li>Original Array Used = Untampered</li>

@@ -3,6 +3,21 @@ import'../App.css';
 import UploadScrape from '../dataManipulationScripts/uploadScrape.js'
 import Product from './productInJson'
 
+/**
+ * A ReactJS class which generates the search bar component which takes in
+ * text and provides a button to submit a search.
+ * @example
+ * return (
+ *     <div class = "searchDiv">
+ *      <form>
+ *       <label>
+ *         <input id = "textSearch"  type="text" name="product" placeholder ="Search a Product..." />
+ *       </label>
+ *         <button onClick = {(e) => {e.preventDefault(); this.submit();}}> Submit Search </button>
+ *       </form>
+ *      </div>
+ * )
+ */
 class SearchBar extends Component
 {
   /*Function for sending the xmlHttpRequest to the python server

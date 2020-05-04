@@ -4,6 +4,26 @@ AreaChart, Area, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid, Tooltip, Leg
 } from 'recharts';
 import Data from '../data/data.json';
 
+
+/**
+ * A ReactJS class which provides a graph component which shows how the
+ * listed time is distributed for the listing.
+ * @example
+ * return (
+ *   <div>
+ *     <h3>ListingTimeDistributionGraph Method</h3>
+ *
+ *     {this.graph(distribution[0],bucketSize,maximumBucket,numOfBuckets)}
+ *     <h5>Average Listed Time is ={distribution[1]} HOURS</h5>
+ *     <p>Settings behind this listing time distribution are displayed below: </p>
+ *
+ *          <p>Original Array Used = Untampered</p>
+ *         <p> Bucket Size = {bucketSize}</p>
+ *         <p> Maximum Bucket = {maximumBucket}</p>
+ *
+ *   </div>
+ * )
+ */
 class ListedTimeDistribution extends Component
 {
 
@@ -79,8 +99,8 @@ class ListedTimeDistribution extends Component
     Data.map(function(content,index)
     {
 
-      timeTerm = (content.listed).split(" ")[2];
-      timeVal = parseInt((content.listed).split(" ")[1]);
+      timeTerm = (content.Listed).split(" ")[2];
+      timeVal = parseInt((content.Listed).split(" ")[1]);
 
       if(timeTerm === "MINUTES" || timeTerm === "MINUTE")
       {

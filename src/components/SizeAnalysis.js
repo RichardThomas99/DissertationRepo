@@ -158,15 +158,15 @@ class SizeAnalysis extends Component
 
       Data.map((content,index)=>
       {
-        if(content.size.length>2){
+        if(content.Size.length>2){
           /*console.log("SIZE FOUND = " +content.size);*/
-          sizeArray[index] =  parseFloat((content.size).substring(3));
+          sizeArray[index] =  parseFloat((content.Size).substring(3));
         }
         else{
           /*console.log("NO SIZE = " + this.getSize(content.desc));*/
-          sizeArray[index] = this.getSize(content.desc);
+          sizeArray[index] = this.getSize(content.Desc);
         }
-        priceArray[index] = parseInt((content.price).substring(1));
+        priceArray[index] = parseInt((content.Price).substring(1));
       });
 
       var distribution = Array(2);

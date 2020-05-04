@@ -2,7 +2,16 @@ import React, {Component} from 'react';
 import Data from '../data/data.json'
 import * as firebase from 'firebase';
 
-
+/**
+ * A JS Class which is in control of updating the Firebase to append the JSON
+ * contents the user wants to upload.
+ * @example
+ * return (
+ *    <div>
+ *        <p>Upload Success</p>
+ *    </div>
+ * )
+ */
 class uploadScrape extends Component
 {
   constructor()
@@ -25,17 +34,19 @@ class uploadScrape extends Component
   //Function to stop overwriting todays scrape data
   checkIfDateIsWritten(product)
   {
+      //Todays Date
       var date = this.state.date;
       var snapshot;
       var array = [];
       var unique = true;
-      const databaseRef = firebase.database().ref("/");
 
+      //Finding the appropriate reference in the database
       const trainerRef = firebase.database().ref().child(product);
       trainerRef.on('value', function(snapshot){
         snapshot.forEach(function(childSnapshot,index){
           var snapshotDate = childSnapshot.key;
 
+          //If a scrape has already been written today, this is true.
           if(date == snapshotDate)
           {
             unique = false;
@@ -43,7 +54,7 @@ class uploadScrape extends Component
         });
       });
 
-
+      //If true: it is safe to save the data.
       return unique;
   }
 
@@ -106,6 +117,7 @@ class uploadScrape extends Component
 getSize(desc)
 {
   var regexOut;
+  //Three Different Regular expressions to obtain size
   //Size __ 3.
   const re = /size.(\d\d?(?:\.5)?)/i;
   //UK 3.
@@ -115,20 +127,18 @@ getSize(desc)
 
   if(re.exec(desc) != null){
     regexOut = re.exec(desc);
-    //console.log("re: "+ regexOut[1]);
     return regexOut[1];
   }
   else if(re2.exec(desc) != null){
     regexOut = re2.exec(desc);
-    //console.log("re2: "+ regexOut[1]);
     return regexOut[1];
   }
   else if (re3.exec(desc) != null){
     regexOut = re3.exec(desc);
-    //console.log("re3: "+ regexOut[1]);
     return regexOut[1];
   }
   else{
+    //If the size is not found
     return -1;
   }
 }
@@ -150,7 +160,7 @@ getSize(desc)
 
     Data.map((content,index)=>
     {
-      price = parseInt((content.price).substring(1));
+      price = parseInt((content.Price).substring(1));
 
       if((price<maxPrice) &&(price>=minPrice))
       {
@@ -159,18 +169,18 @@ getSize(desc)
       }
 
       /*calculating size Distribution .....................................................*/
-      if(content.size.length>2){
-        sizeArray[index] =  parseFloat((content.size).substring(3));
+      if(content.Size.length>2){
+        sizeArray[index] =  parseFloat((content.Size).substring(3));
       }
       else{
-        sizeArray[index] = this.getSize(content.desc);
+        sizeArray[index] = this.getSize(content.Desc);
       }
-      priceArray[index] = parseInt((content.price).substring(1));
+      priceArray[index] = parseInt((content.Price).substring(1));
 
 
     /*Calculating the average listing time across all listings ...............................*/
-    timeTerm = (content.listed).split(" ")[2];
-    timeVal = parseInt((content.listed).split(" ")[1]);
+    timeTerm = (content.Listed).split(" ")[2];
+    timeVal = parseInt((content.Listed).split(" ")[1]);
 
     if(timeTerm === "MINUTES" || timeTerm === "MINUTE")
     {
@@ -233,26 +243,30 @@ getSize(desc)
 
     return 0;
   }
+
+//Writing the Raw Scrape data from the JSON to Firebase
 writeData(product)
 {
   var dataArray = [];
-  var date = this.state.date;
-  console.log("WRITE DATA FUNCTION product "+product);
+  var date = this.state.date; //Getting todays date
+
+  //getting the reference for the data, using the product variable to define name.
   const trainerRef = firebase.database().ref().child(product);
   const dateRef = trainerRef.child(date);
   const dataRef = dateRef.child("Data");
 
+//Mapping through data content and pushing each listing to Firebase individually.
   Data.map(function(content,index)
   {
     dataArray =
     {
-      price: content.price,
-      seller: content.seller,
-      desc: content.desc,
-      price: content.price,
-      size: content.size,
-      location: content.location,
-      listed: content.listed
+      price: content.Price,
+      seller: content.Seller,
+      desc: content.Desc,
+      price: content.Price,
+      size: content.Size,
+      location: content.Location,
+      listed: content.Listed
     };
 
     dataRef.push(dataArray)
@@ -268,9 +282,9 @@ getProduct()
 
   for(i=0;i<5;i++)
   {
-    if(((Data[i].desc).split('\r\n'))[0].length >length)
+    if(((Data[i].Desc).split('\r\n'))[0].length >length)
     {
-      product = (((Data[i].desc).split('\r\n'))[0]);
+      product = (((Data[i].Desc).split('\r\n'))[0]);
     }
   }
   product = product.replace(/ /g,'');

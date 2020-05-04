@@ -1,6 +1,15 @@
 import React, {Component} from 'react';
 import Data from '../data/data.json';
 
+/**
+ * A React JavaScript class which determines the contents of the JSON file
+ * @example
+ * return (
+ *   <div>
+ *     <h2>{product}</h2>
+ *   </div>
+ * )
+ */
 class productInJson extends Component
 {
 
@@ -13,9 +22,9 @@ class productInJson extends Component
 
     for(i=0;i<5;i++)
     {
-      if(((Data[i].desc).split('\r\n'))[0].length >length)
+      if(((Data[i].Desc).split('\r\n'))[0].length >length)
       {
-        product = (((Data[i].desc).split('\r\n'))[0]);
+        product = (((Data[i].Desc).split('\r\n'))[0]);
       }
     }
 

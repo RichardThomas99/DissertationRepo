@@ -1,8 +1,28 @@
 import React, {Component} from 'react';
 import {
-AreaChart, Area, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+AreaChart, Area, Brush, ReferenceLine, XAxis, YAxis, Label, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import Data from '../data/data.json';
+
+/**
+ * A React component which produces a graph component which illustrates how the
+ * price of the current listings is distributed.
+ * @example
+ * return (
+ *   <div>
+ *      <h3>Price Distribution Graph Element</h3>
+ *        {this.graph(distribution,bucketSize,maximumBucket,numOfBuckets)}
+ *      <p>Settings behind this price distribution are listed below: </p>
+ *
+ *       <p>Original Array Used = Untampered</p>
+ *       <p> Bucket Size = {bucketSize}</p>
+ *       <p> Maximum Bucket = {maximumBucket}</p>
+ *
+ *   <h3>Raw Distribution Data: </h3>
+ *     {this.printDistribution(distribution,bucketSize,numOfBuckets)}
+ *  </div>
+ * )
+ */
 class PriceDistributionGraph extends Component
 {
 
@@ -17,9 +37,9 @@ class PriceDistributionGraph extends Component
       dataArray[i] =
       {
         /*The array[i][0] contains a price of the top end of a bucket*/
-        "Price Bracket": (array[i][0]-bucketSize)+ "<" + array[i][0] ,
+        "Price": (array[i][0]-bucketSize)+ "<" + array[i][0] ,
         /*Contains the quantity of listings at that price*/
-        "Price (£)": array[i][1]
+        "Quantity": array[i][1]
       }
     }
 
@@ -28,13 +48,19 @@ class PriceDistributionGraph extends Component
 
       <AreaChart width={950} height={250} data={dataArray}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="Price Bracket" />
-        <YAxis />
+
+        <XAxis dataKey="Price">
+          <Label value="Price" position="right" style={{ textAnchor: 'middle' }} />
+        </XAxis>
+        <YAxis>
+          <Label value="Quantity" angle={270} style={{ textAnchor: 'middle' }} />
+        </YAxis>
+
         <Tooltip />
         <Legend />
         <ReferenceLine y={0} stroke="#000" />
-        <Brush dataKey="Price Bracket" height={30} stroke="#8884d8" />
-        <Area type="monotone" dataKey="Price (£)" stroke="#8884d8" fill="#8884d8" />
+        <Brush dataKey="Price" height={30} stroke="#8884d8" />
+        <Area type="monotone" dataKey="Quantity" stroke="#8884d8" fill="#8884d8" />
       </AreaChart>
     );
 
@@ -59,7 +85,7 @@ class PriceDistributionGraph extends Component
     Data.map(function(content,index)
     {
 
-      priceArray[index] = parseInt((content.price).substring(1));
+      priceArray[index] = parseInt((content.Price).substring(1));
     });
 
     var upperBucket;
